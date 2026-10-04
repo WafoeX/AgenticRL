@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+from collections import Counter
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -98,32 +99,66 @@ def test_both_modes_use_one_checkpoint_registration(entrypoints, tmp_path):
     entrypoints.backend.train.assert_not_awaited()
 
 
-def test_four_scenario_batches_are_sequential_and_preserve_order(entrypoints, tmp_path):
+@pytest.mark.parametrize("gather_mode,expected_peak", [("serial", 8), ("concurrent", 32)])
+def test_four_scenario_batches_are_sequential_and_preserve_order(
+    entrypoints, tmp_path, monkeypatch, gather_mode, expected_peak,
+):
     rows = [{"id": f"case_{i}", "task": f"task {i}", "expected_calls": []} for i in range(9)]
     path = tmp_path / "nine.jsonl"
     path.write_text("".join(json.dumps(row) + "\n" for row in rows))
     active = 0
     maximum = 0
     seen = []
+    batch_calls = []
 
     async def tracked_rollout(model, scenario, **kwargs):
         nonlocal active, maximum
         active += 1
         maximum = max(maximum, active)
         seen.append(scenario["id"])
-        await asyncio.sleep(0)
-        active -= 1
-        return member(4)
+        try:
+            await asyncio.sleep(0)
+            # Distinct per-scenario rewards detect group/result misalignment,
+            # independently of the order in which coroutine requests start.
+            scenario_index = int(scenario["id"].split("_")[1])
+            return member(4.0 - scenario_index / 10)
+        finally:
+            active -= 1
 
-    entrypoints.evaluate.rollout = tracked_rollout
+    async def resolve_group(group):
+        group.trajectories = list(await asyncio.gather(*group.trajectories))
+
+    async def gather(groups, **kwargs):
+        # A new batch must not start until every rollout in the prior batch ends.
+        assert active == 0
+        groups = list(groups)
+        seen_start = len(seen)
+        if gather_mode == "serial":
+            for group in groups:
+                await resolve_group(group)
+        else:
+            await asyncio.gather(*(resolve_group(group) for group in groups))
+        assert active == 0
+        batch_calls.append(Counter(seen[seen_start:]))
+        entrypoints.gathered.append(groups)
+        return groups
+
+    monkeypatch.setattr(entrypoints.evaluate, "rollout", tracked_rollout)
+    monkeypatch.setattr(entrypoints.evaluate.art, "gather_trajectory_groups", gather)
     results = asyncio.run(entrypoints.evaluate.main(
         str(path), 8, output_path=str(tmp_path / "batched.json"),
     ))
     assert [len(batch) for batch in entrypoints.gathered] == [4, 4, 1]
-    assert maximum == 32  # Four scenarios times eight sampled attempts, not all 72.
+    assert maximum <= 32  # The production contract is an upper bound, not a minimum.
+    assert maximum == expected_peak  # Both controlled mock scheduling modes are exercised.
     assert active == 0
-    assert seen == [row["id"] for row in rows for _ in range(8)]
+    assert batch_calls == [
+        Counter({row["id"]: 8 for row in rows[start:start + 4]}) for start in (0, 4, 8)
+    ]
     assert [row["scenario_id"] for row in results["per_scenario"]] == [row["id"] for row in rows]
+    assert [row["mean_reward"] for row in results["per_scenario"]] == pytest.approx(
+        [4.0 - i / 10 for i in range(9)]
+    )
 
 
 @pytest.mark.parametrize("kwargs", [
