@@ -7,16 +7,17 @@ Usage:
     python -m src.train --config configs/train_config.yaml
 """
 # 中文注释：训练入口负责加载场景、注册 ART 模型、收集轨迹并调用 GRPO 更新。
-import asyncio
 import argparse
+import asyncio
 import json
 import sys
-import yaml
+
 import art
+import yaml
 from art.local.backend import LocalBackend
-from src.rollout import rollout
-from src.scenarios import generate_dataset
+
 from src.diagnostics import format_diagnostics, summarize_trajectory_groups
+from src.rollout import rollout
 
 
 # ---------------------------------------------------------------------------
@@ -167,7 +168,7 @@ async def train(
         await model.log(train_groups, metrics=result.metrics, step=result.step, split="train")
 
         if (step + 1) % 5 == 0:
-            print(f"  Running validation...")
+            print("  Running validation...")
             # For val: one group per scenario, num_generations rollouts each
             val_groups = await art.gather_trajectory_groups(
                 (

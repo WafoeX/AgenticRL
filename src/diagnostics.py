@@ -97,20 +97,51 @@ def summarize_by_scenario_type(scenarios: list[dict], groups) -> dict:
     for scenario, group in zip(scenarios, groups, strict=True):
         buckets[str(scenario.get("id") or "unknown")].append(group)
 
-    result = {}
-    for scenario_type, type_groups in sorted(buckets.items()):
-        stats = summarize_trajectory_groups(type_groups)
-        success_count = sum(
-            t.reward > SUCCESS_REWARD_THRESHOLD
-            for group in type_groups for t in group.trajectories
+    return {
+        scenario_type: summarize_evaluation_groups(type_groups)
+        for scenario_type, type_groups in sorted(buckets.items())
+    }
+
+
+def summarize_evaluation_groups(groups) -> dict:
+    """Keep rollout success separate from task success (at least one success).
+
+    With one deterministic attempt per scenario, ``task_success_pct`` is task
+    accuracy. With k sampled attempts, it is observed pass@k. Flagged infra
+    failures cannot count as task successes, but remain in legacy rollout
+    reward/accuracy denominators. Missing attempts therefore make reported task
+    success conservative; callers must also report the infrastructure rate.
+    """
+    groups = list(groups)
+    stats = summarize_trajectory_groups(groups)
+    success_count = sum(
+        t.reward > SUCCESS_REWARD_THRESHOLD
+        for group in groups for t in group.trajectories
+    )
+    task_success_count = sum(
+        any(
+            t.metrics.get("failed", 0) != 1 and t.reward > SUCCESS_REWARD_THRESHOLD
+            for t in group.trajectories
         )
-        attempts = stats["total_rollouts"]
-        result[scenario_type] = {
-            "total_scenarios": len(type_groups),
-            "total_attempts": attempts,
-            "success_count": success_count,
-            "accuracy_pct": success_count / attempts * 100 if attempts else 0.0,
-            "avg_reward": stats["avg_reward"],
-            "diagnostics": stats,
-        }
-    return result
+        for group in groups
+    )
+    attempts = stats["total_rollouts"]
+    return {
+        "total_scenarios": len(groups),
+        "total_attempts": attempts,
+        "success_count": success_count,
+        "accuracy_pct": success_count / attempts * 100 if attempts else 0.0,
+        "avg_reward": stats["avg_reward"],
+        "task_success_count": task_success_count,
+        "task_success_pct": task_success_count / len(groups) * 100 if groups else 0.0,
+        "diagnostics": stats,
+    }
+
+
+def summarize_by_tool_depth(scenarios: list[dict], groups) -> dict:
+    """Depth is the expected tool-call count, including repeated tool names."""
+    depth_scenarios = [
+        {"id": f"{len(scenario.get('expected_calls', []))}-step"}
+        for scenario in scenarios
+    ]
+    return summarize_by_scenario_type(depth_scenarios, groups)

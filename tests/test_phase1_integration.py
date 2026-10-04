@@ -129,7 +129,11 @@ def test_eval_preserves_legacy_results_and_adds_only_optional_diagnostics(
     assert results["accuracy_pct"] == 50
     assert results["avg_reward"] == 0.5
     assert results["per_scenario"][0]["total_attempts"] == 2
-    assert entrypoints.rollout_kwargs == [{}, {}]
+    # Phase 2 changes only eval generation options; legacy result fields remain.
+    assert entrypoints.rollout_kwargs == [
+        {"temperature": 1.2, "top_p": 0.95, "max_tokens": 512, "require_logprobs": False},
+    ] * 2
+    assert results["pass_at_k_pct"] == 100  # 1 successful scenario, not 50% rollout success.
     entrypoints.backend.train.assert_not_awaited()
     if enabled:
         assert results["diagnostics"]["infra_failure_rate"] == 0.5

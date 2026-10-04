@@ -17,6 +17,10 @@ training:
 evaluation:
   num_scenarios: 50
   max_turns: 6
+  # Used by eval_checkpoint.py --config; not by the training loop.
+  batch_scenarios: 4
+  deterministic_temperature: 0.0
+  max_tokens: 512
 
 tools:
   max_turns: 6

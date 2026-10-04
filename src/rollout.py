@@ -24,10 +24,12 @@ cost of a small latency hit.
 # 中文注释：rollout 模块把模型推理、工具执行、轨迹记录和奖励计算串成异步循环。
 import asyncio
 import json
+
 import art
 from openai import AsyncOpenAI, BadRequestError
-from src.tools import TOOL_SCHEMAS, execute_tool
+
 from src.rewards import compute_reward
+from src.tools import TOOL_SCHEMAS, execute_tool
 
 # Max retries for the "Already borrowed" concurrency bug in vLLM.
 # Backoff schedule: 0.1s, 0.3s, 0.9s (exponential, base 3).
@@ -85,12 +87,22 @@ def _build_api_messages(messages_and_choices: list) -> list:
 
 
 # 中文注释：一次 rollout 执行一个场景，循环生成工具调用、执行结果并最终创建 ART 轨迹。
-async def rollout(model: art.Model, scenario: dict) -> art.Trajectory:
+async def rollout(
+    model: art.Model,
+    scenario: dict,
+    *,
+    temperature: float = 1.2,
+    top_p: float = 0.95,
+    max_tokens: int = 512,
+    require_logprobs: bool = True,
+) -> art.Trajectory:
     """Run a single multi-step rollout for a scenario.
 
     Args:
         model: ART model (provides inference endpoint)
         scenario: dict with "task" and "expected_calls"
+        temperature, top_p, max_tokens: generation settings; defaults preserve training.
+        require_logprobs: must remain True for GRPO; evaluation may disable it.
 
     Returns:
         art.Trajectory with reward and metrics. On infrastructure failure
@@ -113,15 +125,23 @@ async def rollout(model: art.Model, scenario: dict) -> art.Trajectory:
         api_key=model.inference_api_key,
         base_url=model.inference_base_url,
     )
+    generation_kwargs = {
+        "temperature": temperature,
+        "top_p": top_p,
+        "max_tokens": max_tokens,
+        "logprobs": require_logprobs,
+    }
+    if require_logprobs:
+        generation_kwargs["top_logprobs"] = 1
 
     try:
-        for turn in range(MAX_TURNS):
+        for _turn in range(MAX_TURNS):
             num_turns += 1
 
             api_messages = _build_api_messages(messages_and_choices)
 
-            # Higher temperature + top_p for exploration.
-            # logprobs=True is REQUIRED for ART/GRPO to compute policy gradient.
+            # Defaults keep training exploration and logprobs unchanged.
+            # Evaluation uses the same loop with different generation settings.
             # Retry loop handles the "Already borrowed" concurrency bug in
             # vLLM 0.17.0+art1 — transient Rust-side lock contention that
             # goes away if we wait a few hundred ms and retry.
@@ -132,11 +152,7 @@ async def rollout(model: art.Model, scenario: dict) -> art.Trajectory:
                         model=model.get_inference_name(),
                         messages=api_messages,
                         tools=TOOL_SCHEMAS,
-                        temperature=1.2,
-                        top_p=0.95,
-                        max_tokens=512,
-                        logprobs=True,
-                        top_logprobs=1,
+                        **generation_kwargs,
                     )
                     break  # success
                 except BadRequestError as e:
