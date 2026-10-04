@@ -1,0 +1,28 @@
+# Install via `pip install -r requirements.txt` OR (preferred) via uv:
+#   pip install uv
+#   uv pip install --system -r requirements.txt
+#
+# ROOT CAUSE DISCOVERY (2026-04-12):
+# ART uses a CUSTOM vLLM fork distributed as a direct wheel URL from GitHub,
+# NOT upstream vLLM from PyPI. Every attempt to pin upstream vLLM (0.7, 0.10,
+# 0.11, 0.16) failed because ART's patches expect APIs that only exist in
+# the custom fork (`vllm-0.17.0+art1`).
+#
+# The fix: use openpipe-art's `[backend]` extra, which declares the custom
+# vLLM wheel as a direct dependency alongside exact pins for trl, transformers,
+# unsloth, torch, etc. This gives you the ART-team's exact tested stack.
+#
+# This MUST be installed on a host with torch >= 2.8.0 preinstalled (e.g.
+# RunPod's `runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu` template).
+# See RUNPOD.md for the step-by-step runbook.
+
+# Training + inference (ART-tested stack, pulls custom vLLM fork)
+openpipe-art[backend]==0.5.17
+
+# Non-ART-managed utilities our scripts need directly
+pyyaml>=6.0
+huggingface_hub
+
+# Dev / test
+pytest>=8.0
+pytest-asyncio>=0.24.0

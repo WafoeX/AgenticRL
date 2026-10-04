@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="DM Sans, sans-serif">
+  <rect width="800" height="520" fill="#fafaf8"/>
+
+  <!-- title -->
+  <text x="400" y="28" text-anchor="middle" font-family="DM Serif Display, serif" font-size="18" fill="#1a1a2e">
+    9 of 50 validation scenarios had at least one successful rollout
+  </text>
+  <text x="400" y="48" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#6b7280">
+    Success = reward &gt; 2.0 (correct tool name + correct arguments). 8 rollouts per scenario.
+  </text>
+
+  <text x="240" y="92" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Convert 98 kg to lbs</text>
+<rect x="260" y="70" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="70" width="420.0" height="34" fill="#2ea043" rx="3"/>
+<text x="688.0" y="92" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#2ea043">7/8 (87%)</text>
+<text x="240" y="106" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">kg→lbs conversion</text>
+<text x="240" y="140" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Weather in Dubai</text>
+<rect x="260" y="118" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="118" width="120.0" height="34" fill="#4285F4" rx="3"/>
+<text x="388.0" y="140" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">2/8 (25%)</text>
+<text x="240" y="154" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">single-tool weather</text>
+<text x="240" y="188" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Weather in Cairo</text>
+<rect x="260" y="166" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="166" width="120.0" height="34" fill="#4285F4" rx="3"/>
+<text x="388.0" y="188" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">2/8 (25%)</text>
+<text x="240" y="202" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">single-tool weather</text>
+<text x="240" y="236" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Japan vs India population</text>
+<rect x="260" y="214" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="214" width="120.0" height="34" fill="#4285F4" rx="3"/>
+<text x="388.0" y="236" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">2/8 (25%)</text>
+<text x="240" y="250" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">2-step lookup</text>
+<text x="240" y="284" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Earth-Sun distance in miles</text>
+<rect x="260" y="262" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="262" width="60.0" height="34" fill="#6b7280" rx="3"/>
+<text x="328.0" y="284" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#6b7280">1/8 (12%)</text>
+<text x="240" y="298" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">search + convert</text>
+<text x="240" y="332" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">441 + 23</text>
+<rect x="260" y="310" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="310" width="60.0" height="34" fill="#6b7280" rx="3"/>
+<text x="328.0" y="332" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#6b7280">1/8 (12%)</text>
+<text x="240" y="346" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">simple calculator</text>
+<text x="240" y="380" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">660 × 87</text>
+<rect x="260" y="358" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="358" width="60.0" height="34" fill="#6b7280" rx="3"/>
+<text x="328.0" y="380" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#6b7280">1/8 (12%)</text>
+<text x="240" y="394" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">simple calculator</text>
+<text x="240" y="428" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">Germany pop / area</text>
+<rect x="260" y="406" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="406" width="60.0" height="34" fill="#6b7280" rx="3"/>
+<text x="328.0" y="428" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#6b7280">1/8 (12%)</text>
+<text x="240" y="442" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">lookup + calc</text>
+<text x="240" y="476" text-anchor="end" font-family="DM Sans, sans-serif" font-size="13" fill="#1a1a2e">France vs India pop</text>
+<rect x="260" y="454" width="480" height="34" fill="#e5e7eb" rx="3"/>
+<rect x="260" y="454" width="60.0" height="34" fill="#6b7280" rx="3"/>
+<text x="328.0" y="476" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#6b7280">1/8 (12%)</text>
+<text x="240" y="490" text-anchor="end" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280" font-style="italic">2-step lookup</text>
+
+  <!-- legend -->
+  <text x="400" y="505" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#6b7280">
+    The 7/8 winner ("Convert 98 kg to lbs") shows the model genuinely learned unit conversion after 16 GRPO steps.
+  </text>
+</svg>

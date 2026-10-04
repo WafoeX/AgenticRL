@@ -1,0 +1,13 @@
+# Local launch drafts (per substack-blog skill rule)
+docs/launch/
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ART training state (regenerated each run)
+.art/
+checkpoints/
+training.log

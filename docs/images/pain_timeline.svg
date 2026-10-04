@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" font-family="DM Sans, sans-serif">
+  <rect width="1100" height="440" fill="#fafaf8"/>
+
+  <text x="550" y="32" text-anchor="middle" font-family="DM Serif Display, serif" font-size="20" fill="#1a1a2e">
+    48 hours of debugging, 11 milestones
+  </text>
+  <text x="550" y="54" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#6b7280">
+    Friday evening → Sunday evening. 9 bugs before the first successful training run.
+  </text>
+
+  <!-- Main timeline bar -->
+  <line x1="80" y1="220" x2="1020" y2="220" stroke="#1a1a2e" stroke-width="2"/>
+
+  <!-- Phase bands -->
+  <rect x="80.0" y="218" width="195.8" height="4" fill="#fef3c7" opacity="1"/>
+<text x="177.9" y="238.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" fill="#6b7280" letter-spacing="0.5" text-transform="uppercase">DEP HELL</text>
+<rect x="275.8" y="218" width="195.8" height="4" fill="#dbeafe" opacity="1"/>
+<text x="373.8" y="238.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" fill="#6b7280" letter-spacing="0.5" text-transform="uppercase">ENVIRONMENT SETUP</text>
+<rect x="471.7" y="218" width="430.8" height="4" fill="#fce7f3" opacity="1"/>
+<text x="687.1" y="238.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" fill="#6b7280" letter-spacing="0.5" text-transform="uppercase">FRAMEWORK BUGS</text>
+<rect x="902.5" y="218" width="117.5" height="4" fill="#dcfce7" opacity="1"/>
+<text x="961.2" y="238.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" fill="#6b7280" letter-spacing="0.5" text-transform="uppercase">TRAINING</text>
+
+  <!-- Pain point markers + labels -->
+  <line x1="119.2" y1="212" x2="119.2" y2="102.0" stroke="#d97706" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="119.2" cy="220" r="11" fill="#d97706" stroke="white" stroke-width="2.5"/>
+<text x="119.2" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">1</text>
+<text x="119.2" y="80.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#d97706">h2</text>
+<text x="119.2" y="94.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">unsloth missing</text>
+<line x1="158.3" y1="228" x2="158.3" y2="332.0" stroke="#d97706" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="158.3" cy="220" r="11" fill="#d97706" stroke="white" stroke-width="2.5"/>
+<text x="158.3" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">2</text>
+<text x="158.3" y="340.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#d97706">h4</text>
+<text x="158.3" y="354.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">TRL ConstantLengthDataset</text>
+<line x1="197.5" y1="212" x2="197.5" y2="162.0" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="197.5" cy="220" r="11" fill="#dc2626" stroke="white" stroke-width="2.5"/>
+<text x="197.5" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">3</text>
+<text x="197.5" y="140.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#dc2626">h6</text>
+<text x="197.5" y="154.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">vllm.adapter_commons gone</text>
+<line x1="236.7" y1="228" x2="236.7" y2="272.0" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="236.7" cy="220" r="11" fill="#dc2626" stroke="white" stroke-width="2.5"/>
+<text x="236.7" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">4</text>
+<text x="236.7" y="280.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#dc2626">h8</text>
+<text x="236.7" y="294.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">ResolutionImpossible</text>
+<line x1="354.2" y1="212" x2="354.2" y2="102.0" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="354.2" cy="220" r="11" fill="#9333ea" stroke="white" stroke-width="2.5"/>
+<text x="354.2" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">5</text>
+<text x="354.2" y="80.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#9333ea">h14</text>
+<text x="354.2" y="94.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">Custom vLLM fork discovered</text>
+<line x1="432.5" y1="228" x2="432.5" y2="332.0" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="432.5" cy="220" r="11" fill="#dc2626" stroke="white" stroke-width="2.5"/>
+<text x="432.5" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">6</text>
+<text x="432.5" y="340.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#dc2626">h18</text>
+<text x="432.5" y="354.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">Switch Colab → RunPod</text>
+<line x1="589.2" y1="212" x2="589.2" y2="162.0" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="589.2" cy="220" r="11" fill="#dc2626" stroke="white" stroke-width="2.5"/>
+<text x="589.2" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">7</text>
+<text x="589.2" y="140.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#dc2626">h26</text>
+<text x="589.2" y="154.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">transformers 5.x tokenize</text>
+<line x1="706.7" y1="228" x2="706.7" y2="272.0" stroke="#d97706" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="706.7" cy="220" r="11" fill="#d97706" stroke="white" stroke-width="2.5"/>
+<text x="706.7" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">8</text>
+<text x="706.7" y="280.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#d97706">h32</text>
+<text x="706.7" y="294.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">Already borrowed (vLLM)</text>
+<line x1="824.2" y1="212" x2="824.2" y2="102.0" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="824.2" cy="220" r="11" fill="#dc2626" stroke="white" stroke-width="2.5"/>
+<text x="824.2" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">9</text>
+<text x="824.2" y="80.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#dc2626">h38</text>
+<text x="824.2" y="94.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">ART monitor crash</text>
+<line x1="941.7" y1="228" x2="941.7" y2="332.0" stroke="#2ea043" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="941.7" cy="220" r="11" fill="#2ea043" stroke="white" stroke-width="2.5"/>
+<text x="941.7" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">10</text>
+<text x="941.7" y="340.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#2ea043">h44</text>
+<text x="941.7" y="354.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">Training ran (step 1→16)</text>
+<line x1="980.8" y1="212" x2="980.8" y2="162.0" stroke="#2ea043" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.7"/>
+<circle cx="980.8" cy="220" r="11" fill="#2ea043" stroke="white" stroke-width="2.5"/>
+<text x="980.8" y="224" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="white">11</text>
+<text x="980.8" y="140.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" font-weight="700" fill="#2ea043">h46</text>
+<text x="980.8" y="154.0" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#374151">Ship step 15 → HF</text>
+
+  <!-- Start / end labels -->
+  <text x="74" y="224" text-anchor="end" font-size="11" fill="#6b7280" font-weight="600">FRI PM</text>
+  <text x="1026" y="224" text-anchor="start" font-size="11" fill="#6b7280" font-weight="600">SUN PM</text>
+
+  <!-- Legend -->
+  <g transform="translate(270, 416)">
+    <circle cx="0" cy="0" r="6" fill="#d97706"/>
+    <text x="12" y="4" font-size="11" fill="#374151">medium</text>
+    <circle cx="90" cy="0" r="6" fill="#dc2626"/>
+    <text x="102" y="4" font-size="11" fill="#374151">high</text>
+    <circle cx="170" cy="0" r="6" fill="#9333ea"/>
+    <text x="182" y="4" font-size="11" fill="#374151">critical breakthrough</text>
+    <circle cx="360" cy="0" r="6" fill="#2ea043"/>
+    <text x="372" y="4" font-size="11" fill="#374151">shipped</text>
+  </g>
+</svg>

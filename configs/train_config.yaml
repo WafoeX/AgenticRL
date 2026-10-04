@@ -1,0 +1,28 @@
+model:
+  base: "Qwen/Qwen2.5-0.5B-Instruct"
+  name: "qwen-0.5b-tool-agent"
+  project: "rl-tool-use"
+
+training:
+  num_steps: 50
+  rollouts_per_step: 96
+  learning_rate: 5.0e-5
+  num_generations: 8
+  # Read-only Phase 1 diagnostics; false restores the original logging.
+  diagnostics_enabled: true
+  max_completion_tokens: 512
+  temperature: 1.0
+  beta: 0.0
+
+evaluation:
+  num_scenarios: 50
+  max_turns: 6
+
+tools:
+  max_turns: 6
+  available:
+    - calculator
+    - get_weather
+    - search
+    - convert_units
+    - lookup_db

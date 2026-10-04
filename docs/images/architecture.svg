@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="DM Sans, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a1a2e"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="520" fill="#fafaf8"/>
+
+  <!-- title -->
+  <text x="400" y="28" text-anchor="middle" font-family="DM Serif Display, serif" font-size="18" fill="#1a1a2e">
+    The RL training loop
+  </text>
+  <text x="400" y="48" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#6b7280">
+    One training step: 96 rollouts → group by scenario → compute advantages → update LoRA
+  </text>
+
+  <!-- Qwen model box (top) -->
+  <rect x="290" y="80" width="220" height="54" fill="#fafaf8" stroke="#4285F4" stroke-width="2" rx="8"/><text x="400" y="103" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">Qwen 2.5 0.5B + LoRA</text><text x="400" y="121" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">served by vLLM 0.17.0+art1</text>
+
+  <!-- arrow down to scenario -->
+  <line x1="400" y1="134" x2="400" y2="168" stroke="#1a1a2e" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Scenario box -->
+  <rect x="260" y="170" width="280" height="46" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="400" y="189" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">"Convert 98 kg to lbs"</text><text x="400" y="207" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">one of 200 training scenarios</text>
+
+  <!-- arrow to rollout -->
+  <line x1="400" y1="216" x2="400" y2="254" stroke="#1a1a2e" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Rollout loop -->
+  <rect x="210" y="256" width="380" height="60" fill="#fafaf8" stroke="#4285F4" stroke-width="2" rx="8"/><text x="400" y="282" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">Rollout loop (up to 6 turns)</text><text x="400" y="300" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">model emits tool_calls → we execute → results fed back</text>
+
+  <!-- Tool boxes below -->
+  <rect x="40" y="340" width="120" height="38" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="100" y="355" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">calculator</text><text x="100" y="373" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">eval expression</text>
+  <rect x="180" y="340" width="120" height="38" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="240" y="355" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">get_weather</text><text x="240" y="373" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">city → temp</text>
+  <rect x="320" y="340" width="120" height="38" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="380" y="355" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">search</text><text x="380" y="373" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">knowledge base</text>
+  <rect x="460" y="340" width="120" height="38" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="520" y="355" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">convert_units</text><text x="520" y="373" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">kg ↔ lbs, km ↔ mi</text>
+  <rect x="600" y="340" width="120" height="38" fill="#fafaf8" stroke="#1a1a2e" stroke-width="2" rx="8"/><text x="660" y="355" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#1a1a2e">lookup_db</text><text x="660" y="373" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">countries</text>
+
+  <!-- arrow from rollout to tools -->
+  <line x1="100" y1="316" x2="100" y2="340" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="240" y1="316" x2="240" y2="340" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="380" y1="316" x2="380" y2="340" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="520" y1="316" x2="520" y2="340" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="660" y1="316" x2="660" y2="340" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- arrow from rollout to reward -->
+  <line x1="400" y1="316" x2="400" y2="400" stroke="#1a1a2e" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Reward box -->
+  <rect x="240" y="402" width="320" height="52" fill="#fafaf8" stroke="#4285F4" stroke-width="2" rx="8"/><text x="400" y="424" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#4285F4">Decomposed reward: [-3, +4]</text><text x="400" y="442" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#6b7280">format + tool-name Jaccard + arg match</text>
+
+  <!-- arrow to GRPO -->
+  <path d="M 560 428 Q 720 428 720 240 Q 720 110 510 110" stroke="#1a1a2e" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="720" y="270" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#6b7280" transform="rotate(90 720 270)">GRPO advantage update (×96 per step)</text>
+
+  <!-- bottom caption -->
+  <text x="400" y="502" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="#6b7280">
+    After 16 steps: 87.5% success on "Convert 98 kg to lbs" (7 of 8 rollouts perfect).
+  </text>
+</svg>
