@@ -12,6 +12,9 @@ Components of R_correct:
 # 中文注释：奖励模块解析模型消息中的 JSON 参数，并将工具轨迹转换为可比较结构。
 import json
 
+from src.reward_v2 import RewardBreakdown as RewardBreakdown
+from src.reward_v2 import compute_reward_v2 as compute_reward_v2
+
 
 # 中文注释：Jaccard 相似度衡量两个集合的交集占并集比例，用于比较名称和参数键。
 def jaccard(set_a: set, set_b: set) -> float:
@@ -104,3 +107,24 @@ def compute_reward(
     r_correct = 6.0 * raw - 3.0
 
     return r_format + r_correct
+
+
+# The original function above remains the v1 implementation, including its
+# literal matching and set behavior; the alias preserves its exact identity.
+compute_reward_v1 = compute_reward
+
+
+def validate_reward_version(version):
+    if version not in ("v1", "v2"):
+        raise ValueError(f"Unknown reward version: {version!r}; expected 'v1' or 'v2'")
+
+
+def compute_reward_by_version(
+    predicted_calls, ground_truth_calls, *, version="v1", observations=None,
+) -> float:
+    validate_reward_version(version)
+    if version == "v1":
+        return compute_reward(predicted_calls, ground_truth_calls)
+    return compute_reward_v2(
+        predicted_calls, ground_truth_calls, observations=observations,
+    ).total

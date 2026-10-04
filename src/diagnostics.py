@@ -145,3 +145,43 @@ def summarize_by_tool_depth(scenarios: list[dict], groups) -> dict:
         for scenario in scenarios
     ]
     return summarize_by_scenario_type(depth_scenarios, groups)
+
+
+def summarize_complete_chains(scenarios, groups, outcomes) -> dict:
+    """Independent complete-chain outcomes; never replace legacy reward stats."""
+    groups = list(groups)
+    if not (len(scenarios) == len(groups) == len(outcomes)):
+        raise ValueError("Complete-chain outcomes must align with scenario groups")
+    for group, flags in zip(groups, outcomes, strict=True):
+        if len(group.trajectories) != len(flags):
+            raise ValueError("Complete-chain outcomes must align with rollout attempts")
+
+    def summarize(indices):
+        attempts = successes = successful_scenarios = 0
+        for index in indices:
+            flags = [
+                isinstance(flag, bool) and flag and t.metrics.get("failed", 0) != 1
+                for t, flag in zip(groups[index].trajectories, outcomes[index], strict=True)
+            ]
+            attempts += len(flags)
+            successes += sum(flags)
+            successful_scenarios += any(flags)
+        return {
+            "total_scenarios": len(indices),
+            "total_rollouts": attempts,
+            "successful_rollouts": successes,
+            "rollout_success_pct": successes / attempts * 100 if attempts else 0.0,
+            "successful_scenarios": successful_scenarios,
+            "task_success_pct": successful_scenarios / len(indices) * 100 if indices else 0.0,
+        }
+
+    types, depths = defaultdict(list), defaultdict(list)
+    for index, scenario in enumerate(scenarios):
+        types[str(scenario.get("id") or "unknown")].append(index)
+        depths[f"{len(scenario.get('expected_calls', []))}-step"].append(index)
+    return {
+        "definition": "complete-tool-chain-v1; not final-answer correctness",
+        "overall": summarize(list(range(len(groups)))),
+        "by_scenario_type": {key: summarize(indices) for key, indices in sorted(types.items())},
+        "by_tool_depth": {key: summarize(indices) for key, indices in sorted(depths.items())},
+    }

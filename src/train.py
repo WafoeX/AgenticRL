@@ -11,13 +11,19 @@ import argparse
 import asyncio
 import json
 import sys
+from typing import TypedDict
 
 import art
 import yaml
 from art.local.backend import LocalBackend
 
 from src.diagnostics import format_diagnostics, summarize_trajectory_groups
+from src.rewards import validate_reward_version
 from src.rollout import rollout
+
+
+class _RewardOptions(TypedDict, total=False):
+    reward_version: str
 
 
 # ---------------------------------------------------------------------------
@@ -73,7 +79,11 @@ async def train(
     train_scenarios_path: str = "data/scenarios_train.jsonl",
     val_scenarios_path: str = "data/scenarios_val.jsonl",
     diagnostics_enabled: bool = True,
+    reward_version: str = "v1",
 ):
+    validate_reward_version(reward_version)
+    reward_kwargs: _RewardOptions = {} if reward_version == "v1" else {"reward_version": reward_version}
+    print(f"Reward version: {reward_version}")
 # 中文注释：训练和验证数据以 JSONL 逐行读取，保持数据文件格式简单可审计。
     with open(train_scenarios_path) as f:
         train_scenarios = [json.loads(line) for line in f]
@@ -123,7 +133,7 @@ async def train(
         train_groups = await art.gather_trajectory_groups(
             (
                 art.TrajectoryGroup(
-                    rollout(model, scenario) for _ in range(num_generations)
+                    rollout(model, scenario, **reward_kwargs) for _ in range(num_generations)
                 )
                 for scenario in step_scenarios
             ),
@@ -173,7 +183,7 @@ async def train(
             val_groups = await art.gather_trajectory_groups(
                 (
                     art.TrajectoryGroup(
-                        rollout(model, scenario) for _ in range(num_generations)
+                        rollout(model, scenario, **reward_kwargs) for _ in range(num_generations)
                     )
                     for scenario in val_scenarios
                 ),
@@ -198,6 +208,7 @@ def main():
     parser.add_argument("--lr", type=float, default=None)
     parser.add_argument("--model", type=str, default=None)
     parser.add_argument("--no-diagnostics", action="store_true", help="Disable read-only diagnostics")
+    parser.add_argument("--reward-version", choices=("v1", "v2"), default=None)
     args = parser.parse_args()
 
     kwargs = {}
@@ -213,6 +224,7 @@ def main():
             "num_generations": config["training"]["num_generations"],
             "learning_rate": config["training"]["learning_rate"],
             "diagnostics_enabled": config["training"].get("diagnostics_enabled", True),
+            "reward_version": config["training"].get("reward_version", "v1"),
         }
     if args.steps:
         kwargs["num_steps"] = args.steps
@@ -225,6 +237,8 @@ def main():
 
     if args.no_diagnostics:
         kwargs["diagnostics_enabled"] = False
+    if args.reward_version is not None:
+        kwargs["reward_version"] = args.reward_version
 
     asyncio.run(train(**kwargs))
 

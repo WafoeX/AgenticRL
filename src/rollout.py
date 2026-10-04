@@ -24,11 +24,12 @@ cost of a small latency hit.
 # 中文注释：rollout 模块把模型推理、工具执行、轨迹记录和奖励计算串成异步循环。
 import asyncio
 import json
+from dataclasses import asdict
 
 import art
 from openai import AsyncOpenAI, BadRequestError
 
-from src.rewards import compute_reward
+from src.rewards import compute_reward, compute_reward_v2, validate_reward_version
 from src.tools import TOOL_SCHEMAS, execute_tool
 
 # Max retries for the "Already borrowed" concurrency bug in vLLM.
@@ -95,6 +96,8 @@ async def rollout(
     top_p: float = 0.95,
     max_tokens: int = 512,
     require_logprobs: bool = True,
+    reward_version: str = "v1",
+    trace_sink: list[dict] | None = None,
 ) -> art.Trajectory:
     """Run a single multi-step rollout for a scenario.
 
@@ -103,6 +106,8 @@ async def rollout(
         scenario: dict with "task" and "expected_calls"
         temperature, top_p, max_tokens: generation settings; defaults preserve training.
         require_logprobs: must remain True for GRPO; evaluation may disable it.
+        reward_version: opt-in v2; v1 calls the unchanged original reward function.
+        trace_sink: optional fresh list receiving tool execution records, outside ART.
 
     Returns:
         art.Trajectory with reward and metrics. On infrastructure failure
@@ -110,6 +115,12 @@ async def rollout(
         failed trajectory with reward=-3.0 so the training step doesn't
         crash on a single bad rollout.
     """
+    validate_reward_version(reward_version)
+    if trace_sink is not None and trace_sink:
+        raise ValueError("trace_sink must be a fresh empty list for each rollout")
+    capture_trace = reward_version == "v2" or trace_sink is not None
+    tool_trace = [] if trace_sink is None else trace_sink
+
     # messages_and_choices is a mixed list: dicts for system/user/tool turns,
     # raw Choice objects for assistant turns. ART reads logprobs from the
     # Choice objects during training, so we must NOT convert them to dicts.
@@ -197,7 +208,13 @@ async def rollout(
 
                 tools_called.append(tool_name)
                 actual_calls.append({"name": tool_name, "arguments": tool_args})
+                trace_entry = None
+                if capture_trace:
+                    trace_entry = {"name": tool_name, "arguments": tool_args, "result": None, "turn": num_turns}
+                    tool_trace.append(trace_entry)
                 result = execute_tool(tool_name, tool_args)
+                if trace_entry is not None:
+                    trace_entry["result"] = result
 
                 messages_and_choices.append(
                     {"role": "tool", "tool_call_id": tc.id, "content": result}
@@ -218,14 +235,20 @@ async def rollout(
         )
 
     expected_calls = scenario.get("expected_calls", [])
-    reward = compute_reward(actual_calls, expected_calls)
+    metrics = {
+        "num_turns": float(num_turns),
+        "num_tools": float(len(tools_called)),
+        "failed": 0.0,
+    }
+    if reward_version == "v1":
+        reward = compute_reward(actual_calls, expected_calls)
+    else:
+        breakdown = compute_reward_v2(actual_calls, expected_calls, observations=tool_trace)
+        reward = breakdown.total
+        metrics.update({f"reward_v2/{key}": value for key, value in asdict(breakdown).items()})
 
     return art.Trajectory(
         messages_and_choices=messages_and_choices,
         reward=reward,
-        metrics={
-            "num_turns": float(num_turns),
-            "num_tools": float(len(tools_called)),
-            "failed": 0.0,
-        },
+        metrics=metrics,
     )
