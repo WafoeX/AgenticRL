@@ -21,7 +21,7 @@ def entrypoints(monkeypatch):
         delete_checkpoints=AsyncMock(), log=AsyncMock(),
     )
     result = SimpleNamespace(metrics={"loss": 0.1}, step=1)
-    backend = SimpleNamespace(train=AsyncMock(return_value=result))
+    backend = SimpleNamespace(train=AsyncMock(return_value=result), close=AsyncMock())
     gathered = []
     rollout_kwargs = []
     call_count = 0

@@ -28,27 +28,12 @@ import art
 import yaml
 from art.local.backend import LocalBackend
 
-# Keep the existing ART monitor workaround; no checkpoint/backend changes.
-_orig_monitor = LocalBackend._monitor_openai_server
-
-
-async def _safe_monitor(self, *args, **kwargs):
-    try:
-        await _orig_monitor(self, *args, **kwargs)
-    except Exception as e:
-        print(
-            f"[eval] suppressed _monitor_openai_server crash: {type(e).__name__}: {e}",
-            file=sys.stderr,
-        )
-
-
-LocalBackend._monitor_openai_server = _safe_monitor
-
 # Also support direct `python scripts/eval_checkpoint.py` without PYTHONPATH.
 _project_root = str(Path(__file__).resolve().parents[1])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
+from src.backend_lifecycle import install_monitor_workaround, managed_backend  # noqa: E402
 from src.diagnostics import (  # noqa: E402
     SUCCESS_REWARD_THRESHOLD,
     format_diagnostics,
@@ -58,8 +43,14 @@ from src.diagnostics import (  # noqa: E402
     summarize_evaluation_groups,
 )
 from src.reward_v2 import is_complete_tool_chain  # noqa: E402
-from src.rewards import compute_reward_by_version, compute_reward_v2, validate_reward_version  # noqa: E402
+from src.rewards import (  # noqa: E402
+    compute_reward_by_version,
+    compute_reward_v2,
+    validate_reward_version,
+)
 from src.rollout import rollout  # noqa: E402
+
+install_monitor_workaround(LocalBackend)
 
 
 async def _recorded_rollout(model, scenario, generation_kwargs, reward_version, record, capture_trace):
@@ -290,39 +281,41 @@ async def main(
     with open(scenarios_path) as f:
         scenarios = [json.loads(line) for line in f]
     print(f"Loaded {len(scenarios)} validation scenarios")
-    backend = LocalBackend()
-    model = art.TrainableModel(name=model_name, project=project_name, base_model=base_model)
-    await model.register(backend)
-    current_step = await model.get_step()
-    print(f"Loaded checkpoint: step {current_step}")
+    async with managed_backend(LocalBackend()) as backend:
+        model = art.TrainableModel(name=model_name, project=project_name, base_model=base_model)
+        await model.register(backend)
+        current_step = await model.get_step()
+        print(f"Loaded checkpoint: step {current_step}")
 
-    modes = ("deterministic", "sample") if mode == "both" else (mode,)
-    reports = {}
-    for eval_mode in modes:
-        reports[eval_mode] = await _evaluate_mode(
-            model, scenarios, current_step, scenarios_path, num_generations,
-            mode=eval_mode, batch_scenarios=batch_scenarios, max_tokens=max_tokens,
-            diagnostics_enabled=diagnostics_enabled, reward_version=reward_version,
-            complete_chain_enabled=complete_chain_enabled, compare_rewards=compare_rewards,
-            save_traces=save_traces,
-        )
-    results = reports[mode] if mode != "both" else {
-        "step": current_step, "mode": "both", "scenarios_path": scenarios_path,
-        "deterministic_accuracy_pct": reports["deterministic"]["deterministic_accuracy_pct"],
-        "pass_at_k": num_generations, "pass_at_k_pct": reports["sample"]["pass_at_k_pct"],
-        "avg_reward": reports["sample"]["avg_reward"],
-        "avg_reward_definition": "sample mode; deterministic reward is in evaluations.deterministic",
-        "evaluations": reports,
-    }
-    if mode == "both":
-        results["reward_version"] = reward_version
-        results["reward_version_definition"] = "rollout scoring version; not checkpoint training provenance"
-        if complete_chain_enabled:
-            results["complete_chain_accuracy_pct"] = reports["deterministic"]["complete_chain_accuracy_pct"]
-            results["complete_chain_pass_at_k_pct"] = reports["sample"]["complete_chain_pass_at_k_pct"]
-    with open(output_path, "w") as f:
-        json.dump(results, f, indent=2)
-    print(f"Detailed results saved to {output_path}")
+        modes = ("deterministic", "sample") if mode == "both" else (mode,)
+        reports = {}
+        for eval_mode in modes:
+            reports[eval_mode] = await _evaluate_mode(
+                model, scenarios, current_step, scenarios_path, num_generations,
+                mode=eval_mode, batch_scenarios=batch_scenarios, max_tokens=max_tokens,
+                diagnostics_enabled=diagnostics_enabled, reward_version=reward_version,
+                complete_chain_enabled=complete_chain_enabled, compare_rewards=compare_rewards,
+                save_traces=save_traces,
+            )
+        results = reports[mode] if mode != "both" else {
+            "step": current_step, "mode": "both", "scenarios_path": scenarios_path,
+            "deterministic_accuracy_pct": reports["deterministic"]["deterministic_accuracy_pct"],
+            "pass_at_k": num_generations, "pass_at_k_pct": reports["sample"]["pass_at_k_pct"],
+            "avg_reward": reports["sample"]["avg_reward"],
+            "avg_reward_definition": "sample mode; deterministic reward is in evaluations.deterministic",
+            "evaluations": reports,
+        }
+        if mode == "both":
+            results["reward_version"] = reward_version
+            results["reward_version_definition"] = "rollout scoring version; not checkpoint training provenance"
+            if complete_chain_enabled:
+                results["complete_chain_accuracy_pct"] = reports["deterministic"]["complete_chain_accuracy_pct"]
+                results["complete_chain_pass_at_k_pct"] = reports["sample"]["complete_chain_pass_at_k_pct"]
+        with open(output_path, "w") as f:
+            json.dump(results, f, indent=2)
+        print(f"Detailed results saved to {output_path}", flush=True)
+
+    print("Evaluation complete! Backend resources released.", flush=True)
     return results
 
 

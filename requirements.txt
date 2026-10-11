@@ -22,6 +22,8 @@ openpipe-art[backend]==0.5.17
 # Non-ART-managed utilities our scripts need directly
 pyyaml>=6.0
 huggingface_hub
+# Backend-owned process-tree teardown (PID + creation-time identity checks)
+psutil>=5.9
 
 # Dev / test
 pytest>=8.0

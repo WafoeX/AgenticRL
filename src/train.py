@@ -10,13 +10,13 @@ Usage:
 import argparse
 import asyncio
 import json
-import sys
 from typing import TypedDict
 
 import art
 import yaml
 from art.local.backend import LocalBackend
 
+from src.backend_lifecycle import install_monitor_workaround, managed_backend
 from src.diagnostics import format_diagnostics, summarize_trajectory_groups
 from src.rewards import validate_reward_version
 from src.rollout import rollout
@@ -26,45 +26,9 @@ class _RewardOptions(TypedDict, total=False):
     reward_version: str
 
 
-# ---------------------------------------------------------------------------
-# Monkey patch: suppress ART 0.5.17's _monitor_openai_server background crash.
-#
-# After each gradient update, ART launches a background task that polls vLLM
-# with `openai_client.completions.create(model="qwen@N")` to verify the new
-# LoRA version registered. There's a race: vLLM is still finishing LoRA
-# registration when the poll happens, and returns 404 NotFoundError. The
-# background task has no retry/tolerance, so it re-raises, closing the
-# proxy, which kills the next `backend.train()` call with "Proxy is closing".
-#
-# Pattern: training crashes ~8-20 steps in, losing all progress above the
-# last saved checkpoint. This happens on every run regardless of rollout
-# count or retry logic in src/rollout.py — the bug is in ART's own code.
-#
-# Fix: wrap _monitor_openai_server so any exception is caught and logged
-# instead of propagating. The monitor is only a health check; losing it
-# just means we don't get a warning if vLLM dies. In exchange, training
-# runs to completion.
-#
-# Remove this patch once ART upstream fixes the race (track via issues
-# filed on openpipe/ART).
-# ---------------------------------------------------------------------------
-# 中文注释：保存 ART 原始监控函数，下面的包装器只改变异常传播行为。
-_orig_monitor = LocalBackend._monitor_openai_server
-
-
-# 中文注释：监控任务失败时记录错误而不终止训练主循环，规避已知的后台竞态。
-async def _safe_monitor(self, *args, **kwargs):
-    try:
-        await _orig_monitor(self, *args, **kwargs)
-    except Exception as e:
-        print(
-            f"[train.py] suppressed _monitor_openai_server crash: "
-            f"{type(e).__name__}: {e}",
-            file=sys.stderr,
-        )
-
-
-LocalBackend._monitor_openai_server = _safe_monitor
+# Preserve the existing health-check workaround, shared with evaluation.
+# The wrapper also tracks monitors for explicit, backend-scoped teardown.
+install_monitor_workaround(LocalBackend)
 
 
 # 中文注释：训练函数按照场景分组收集多条 rollout，让 GRPO 在组内计算相对优势。
@@ -105,98 +69,99 @@ async def train(
         f"{num_generations} rollouts/scenario = {rollouts_per_step} rollouts/step"
     )
 
-    backend = LocalBackend()
-    model = art.TrainableModel(
-        name=model_name,
-        project=project_name,
-        base_model=base_model,
-    )
-    await model.register(backend)
-
-    start_step = await model.get_step()
-    print(f"Starting from step {start_step}")
-
-    for step in range(start_step, num_steps):
-        print(f"\n{'='*60}")
-        print(f"Step {step + 1}/{num_steps}")
-        print(f"{'='*60}")
-
-        # Pick unique scenarios for this step — one per group
-        step_scenarios = []
-        for i in range(scenarios_per_step):
-            idx = (step * scenarios_per_step + i) % len(train_scenarios)
-            step_scenarios.append(train_scenarios[idx])
-
-        # Each group = num_generations rollouts of the SAME scenario.
-        # This gives GRPO the within-group reward variance it needs.
-# 中文注释：同一场景生成 num_generations 条轨迹，形成 GRPO 的一个比较组。
-        train_groups = await art.gather_trajectory_groups(
-            (
-                art.TrajectoryGroup(
-                    rollout(model, scenario, **reward_kwargs) for _ in range(num_generations)
-                )
-                for scenario in step_scenarios
-            ),
-            pbar_desc=f"step {step + 1}",
+    async with managed_backend(LocalBackend()) as backend:
+        model = art.TrainableModel(
+            name=model_name,
+            project=project_name,
+            base_model=base_model,
         )
+        await model.register(backend)
 
-        rewards = [t.reward for g in train_groups for t in g.trajectories]
-        avg_reward = sum(rewards) / len(rewards) if rewards else 0
-        tools_used = [t.metrics.get("num_tools", 0) for g in train_groups for t in g.trajectories]
-        avg_tools = sum(tools_used) / len(tools_used) if tools_used else 0
+        start_step = await model.get_step()
+        print(f"Starting from step {start_step}")
 
-        # Per-group variance — critical diagnostic. If all groups have std=0,
-        # GRPO has no signal and skips training. We need at least some groups
-        # with variance for the model to learn.
-        groups_with_variance = 0
-        for gi, g in enumerate(train_groups):
-            group_rewards = [t.reward for t in g.trajectories]
-            if not group_rewards:
-                continue
-            g_mean = sum(group_rewards) / len(group_rewards)
-            g_std = (sum((r - g_mean) ** 2 for r in group_rewards) / len(group_rewards)) ** 0.5
-            if g_std > 0:
-                groups_with_variance += 1
-            task_preview = step_scenarios[gi]["task"][:50] if gi < len(step_scenarios) else "?"
-            print(
-                f"  group {gi}: mean={g_mean:+.2f} std={g_std:.3f} "
-                f"min={min(group_rewards):+.1f} max={max(group_rewards):+.1f} "
-                f"| {task_preview}"
-            )
-        print(
-            f"  Avg reward: {avg_reward:.3f} | Avg tools/rollout: {avg_tools:.1f} "
-            f"| groups with variance: {groups_with_variance}/{len(train_groups)}"
-        )
+        for step in range(start_step, num_steps):
+            print(f"\n{'='*60}")
+            print(f"Step {step + 1}/{num_steps}")
+            print(f"{'='*60}")
 
-        # Phase 1 is observation only: the original groups/rewards still go to GRPO.
-        if diagnostics_enabled:
-            print(format_diagnostics(summarize_trajectory_groups(train_groups)))
+            # Pick unique scenarios for this step — one per group
+            step_scenarios = []
+            for i in range(scenarios_per_step):
+                idx = (step * scenarios_per_step + i) % len(train_scenarios)
+                step_scenarios.append(train_scenarios[idx])
 
-# 中文注释：每一步训练前清理临时检查点，避免旧文件干扰当前后端状态。
-        await model.delete_checkpoints()
-        result = await backend.train(model, train_groups, learning_rate=learning_rate)
-        await model.log(train_groups, metrics=result.metrics, step=result.step, split="train")
-
-        if (step + 1) % 5 == 0:
-            print("  Running validation...")
-            # For val: one group per scenario, num_generations rollouts each
-            val_groups = await art.gather_trajectory_groups(
+            # Each group = num_generations rollouts of the SAME scenario.
+            # This gives GRPO the within-group reward variance it needs.
+            train_groups = await art.gather_trajectory_groups(
                 (
                     art.TrajectoryGroup(
                         rollout(model, scenario, **reward_kwargs) for _ in range(num_generations)
                     )
-                    for scenario in val_scenarios
+                    for scenario in step_scenarios
                 ),
-                pbar_desc="validation",
+                pbar_desc=f"step {step + 1}",
             )
-            val_rewards = [t.reward for g in val_groups for t in g.trajectories]
-            val_avg = sum(val_rewards) / len(val_rewards) if val_rewards else 0
-            print(f"  Val avg reward: {val_avg:.3f}")
-            if diagnostics_enabled:
-                print(format_diagnostics(summarize_trajectory_groups(val_groups)))
-            await model.log(val_groups, step=result.step, split="val")
 
-    print(f"\nTraining complete! Final step: {num_steps}")
+            rewards = [t.reward for g in train_groups for t in g.trajectories]
+            avg_reward = sum(rewards) / len(rewards) if rewards else 0
+            tools_used = [t.metrics.get("num_tools", 0) for g in train_groups for t in g.trajectories]
+            avg_tools = sum(tools_used) / len(tools_used) if tools_used else 0
+
+            # Per-group variance — critical diagnostic. If all groups have std=0,
+            # GRPO has no signal and skips training. We need at least some groups
+            # with variance for the model to learn.
+            groups_with_variance = 0
+            for gi, g in enumerate(train_groups):
+                group_rewards = [t.reward for t in g.trajectories]
+                if not group_rewards:
+                    continue
+                g_mean = sum(group_rewards) / len(group_rewards)
+                g_std = (sum((r - g_mean) ** 2 for r in group_rewards) / len(group_rewards)) ** 0.5
+                if g_std > 0:
+                    groups_with_variance += 1
+                task_preview = step_scenarios[gi]["task"][:50] if gi < len(step_scenarios) else "?"
+                print(
+                    f"  group {gi}: mean={g_mean:+.2f} std={g_std:.3f} "
+                    f"min={min(group_rewards):+.1f} max={max(group_rewards):+.1f} "
+                    f"| {task_preview}"
+                )
+            print(
+                f"  Avg reward: {avg_reward:.3f} | Avg tools/rollout: {avg_tools:.1f} "
+                f"| groups with variance: {groups_with_variance}/{len(train_groups)}"
+            )
+
+            # Phase 1 is observation only: the original groups/rewards still go to GRPO.
+            if diagnostics_enabled:
+                print(format_diagnostics(summarize_trajectory_groups(train_groups)))
+
+            # Existing checkpoint retention policy is unchanged.
+            await model.delete_checkpoints()
+            result = await backend.train(model, train_groups, learning_rate=learning_rate)
+            await model.log(train_groups, metrics=result.metrics, step=result.step, split="train")
+
+            if (step + 1) % 5 == 0:
+                print("  Running validation...")
+                # For val: one group per scenario, num_generations rollouts each
+                val_groups = await art.gather_trajectory_groups(
+                    (
+                        art.TrajectoryGroup(
+                            rollout(model, scenario, **reward_kwargs) for _ in range(num_generations)
+                        )
+                        for scenario in val_scenarios
+                    ),
+                    pbar_desc="validation",
+                )
+                val_rewards = [t.reward for g in val_groups for t in g.trajectories]
+                val_avg = sum(val_rewards) / len(val_rewards) if val_rewards else 0
+                print(f"  Val avg reward: {val_avg:.3f}")
+                if diagnostics_enabled:
+                    print(format_diagnostics(summarize_trajectory_groups(val_groups)))
+                await model.log(val_groups, step=result.step, split="val")
+
+        print(f"\nTraining updates complete! Target step: {num_steps}; closing backend...", flush=True)
+
+    print(f"Training complete! Backend resources released. Target step: {num_steps}", flush=True)
 
 
 # 中文注释：命令行层把配置文件和命令行覆盖项汇总后启动异步训练。
