@@ -1,0 +1,71 @@
+{
+  "v1_deterministic": {
+    "step": 2,
+    "reward_version": "v1",
+    "total_rollouts": 50,
+    "infra_failure_rate": 0.0,
+    "reward_threshold_success_pct": 22.0,
+    "complete_chain": {
+      "total_scenarios": 50,
+      "total_rollouts": 50,
+      "successful_rollouts": 13,
+      "rollout_success_pct": 26.0,
+      "successful_scenarios": 13,
+      "task_success_pct": 26.0
+    },
+    "reward_comparison": {
+      "same_trajectories": true,
+      "available_rollouts": 50,
+      "excluded_rollouts": 0,
+      "v1_avg_reward": 0.06999999999999999,
+      "v2_avg_reward": -0.1375,
+      "note": "Scorer comparison only; not evidence of model improvement. Failed/missing traces excluded."
+    }
+  },
+  "v1_sample": {
+    "step": 2,
+    "reward_version": "v1",
+    "total_rollouts": 400,
+    "infra_failure_rate": 0.0,
+    "reward_threshold_success_pct": 34.0,
+    "complete_chain": {
+      "total_scenarios": 50,
+      "total_rollouts": 400,
+      "successful_rollouts": 104,
+      "rollout_success_pct": 26.0,
+      "successful_scenarios": 16,
+      "task_success_pct": 32.0
+    },
+    "reward_comparison": {
+      "same_trajectories": true,
+      "available_rollouts": 400,
+      "excluded_rollouts": 0,
+      "v1_avg_reward": -0.08416666666666668,
+      "v2_avg_reward": -0.173359375,
+      "note": "Scorer comparison only; not evidence of model improvement. Failed/missing traces excluded."
+    }
+  },
+  "v2_deterministic": {
+    "step": 2,
+    "reward_version": "v2",
+    "total_rollouts": 50,
+    "infra_failure_rate": 0.0,
+    "reward_threshold_success_pct": 26.0,
+    "complete_chain": {
+      "total_scenarios": 50,
+      "total_rollouts": 50,
+      "successful_rollouts": 13,
+      "rollout_success_pct": 26.0,
+      "successful_scenarios": 13,
+      "task_success_pct": 26.0
+    },
+    "reward_comparison": {
+      "same_trajectories": true,
+      "available_rollouts": 50,
+      "excluded_rollouts": 0,
+      "v1_avg_reward": 0.06999999999999999,
+      "v2_avg_reward": -0.1375,
+      "note": "Scorer comparison only; not evidence of model improvement. Failed/missing traces excluded."
+    }
+  }
+}

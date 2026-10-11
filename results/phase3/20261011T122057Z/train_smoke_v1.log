@@ -1,0 +1,92 @@
+Skipping import of cpp extensions due to incompatible torch version 2.10.0+cu128 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+Reward version: v1
+Loaded 200 train, 50 val scenarios
+GRPO config: 4 scenarios/step × 8 rollouts/scenario = 32 rollouts/step
+Skipping import of cpp extensions due to incompatible torch version 2.10.0+cu128 for torchao version 0.15.0             Please see https://github.com/pytorch/ao/issues/2919 for more info
+/content/agent-venv/lib/python3.13/site-packages/art/__init__.py:37: UserWarning: WARNING: Unsloth should be imported before [transformers] to ensure all optimizations are applied. Your code may run slower or encounter memory issues without these optimizations.
+
+Please restructure your imports with 'import unsloth' at the top of your file.
+  import unsloth  # noqa: F401
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+==((====))==  Unsloth 2026.3.3: Fast Qwen2 patching. Transformers: 4.57.3. vLLM: 0.17.0.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.494 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 8.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.35. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/AgenticRL-smoke/src/train.py", line 247, in <module>
+    main()
+    ~~~~^^
+  File "/content/AgenticRL-smoke/src/train.py", line 243, in main
+    asyncio.run(train(**kwargs))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/nest_asyncio.py", line 30, in run
+    return loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/nest_asyncio.py", line 98, in run_until_complete
+    return f.result()
+           ~~~~~~~~^^
+  File "/usr/lib/python3.13/asyncio/futures.py", line 199, in result
+    raise self._exception.with_traceback(self._exception_tb)
+  File "/usr/lib/python3.13/asyncio/tasks.py", line 306, in __step_run_and_handle_result
+    result = coro.throw(exc)
+  File "/content/AgenticRL-smoke/src/train.py", line 114, in train
+    await model.register(backend)
+  File "/content/agent-venv/lib/python3.13/site-packages/art/model.py", line 1003, in register
+    base_url, api_key = await backend._prepare_backend_for_training(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self, _openai_client_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/content/agent-venv/lib/python3.13/site-packages/art/local/backend.py", line 402, in _prepare_backend_for_training
+    host, port = await service.start_openai_server(config=resolved_config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/mp_actors/traceback.py", line 26, in async_wrapper
+    raise e.with_traceback(streamlined_traceback())
+  File "/content/agent-venv/lib/python3.13/site-packages/art/unsloth/service.py", line 477, in start_openai_server
+    self._state.trainer.save_model(lora_path)
+    ^^^^^^^^^^^
+  File "/usr/lib/python3.13/functools.py", line 1025, in __get__
+    val = self.func(instance)
+    ^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/art/unsloth/service.py", line 959, in _state
+    unsloth.FastLanguageModel.get_peft_model(
+    ^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/unsloth/models/llama.py", line 3122, in get_peft_model
+    model = _get_peft_model(model, lora_config)
+    ^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/mapping_func.py", line 198, in get_peft_model
+    return MODEL_TYPE_TO_PEFT_MODEL_MAPPING[peft_config.task_type](
+      ^^^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/peft_model.py", line 2082, in __init__
+    super().__init__(model, peft_config, adapter_name, **kwargs)
+    ^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/peft_model.py", line 177, in __init__
+    self.base_model = cls(model, {adapter_name: peft_config}, adapter_name)
+    ^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/tuners/tuners_utils.py", line 344, in __init__
+    self.inject_adapter(self.model, adapter_name, low_cpu_mem_usage=low_cpu_mem_usage, state_dict=state_dict)
+    ^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/tuners/tuners_utils.py", line 978, in inject_adapter
+    self._create_and_replace(
+    
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/tuners/lora/model.py", line 389, in _create_and_replace
+    new_module = self._create_new_module(lora_config, adapter_name, target, device_map=device_map, **kwargs)
+    ^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/tuners/lora/model.py", line 552, in _create_new_module
+    new_module = dispatcher(target, adapter_name, config=lora_config, **kwargs)
+    ^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/tuners/lora/torchao.py", line 160, in dispatch_torchao
+    if not is_torchao_available():
+      ^^^^^^^^^^^^^^^^^
+  File "/content/agent-venv/lib/python3.13/site-packages/peft/import_utils.py", line 162, in is_torchao_available
+    raise ImportError(
+    ^^^^^^^^^^^^^^^
+ImportError: Found an incompatible version of torchao. Found version 0.15.0, but only versions above 0.16.0 are supported
+/usr/lib/python3.13/multiprocessing/resource_tracker.py:479: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-wsaj1dfl'}
+  warnings.warn(

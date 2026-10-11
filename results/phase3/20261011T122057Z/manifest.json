@@ -1,0 +1,162 @@
+{
+  "run_id": "20261011T122057Z",
+  "checkpoint_source": "A-original-server-step2",
+  "notes": "填写人工审阅结论、失败/重跑/补丁情况；不要填入密钥或token",
+  "artifact_location": "Google Drive: MyDrive/AgenticRL-validation/20261011T122057Z",
+  "copied_bytes": 968591,
+  "artifacts": [
+    {
+      "name": "art_smoke_peft018_step2.tar.gz",
+      "bytes": 40650058,
+      "sha256": "f6c6d1edb7f0c5480ecc1d65c7ad8a95a9434a76d7ef359cba4b5b5997197b8b",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "backend_preflight.log",
+      "bytes": 384,
+      "sha256": "449d421c08d28e03ddce2a857a46fcaba26e5930a542537947dd92f6b6da0a0b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "dependency_check_after_peft_fix.log",
+      "bytes": 114,
+      "sha256": "1b893b30126a232e928b7b14418ae41a234861ba4e68739b4132b49e96ffba2f",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "eval_step2_reward_audit.json",
+      "bytes": 660084,
+      "sha256": "1cfa7015e45febf08ad46573492b7e8fb2e33c3f33f164a2dcb32499fb0c3142",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_step2_reward_audit.log",
+      "bytes": 120857,
+      "sha256": "88474b12af53cc8aa7b2a2b0f5ce759e64e35c68d28507a0714e185b50bbd0f2",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_step2_v2_deterministic.json",
+      "bytes": 99215,
+      "sha256": "5506e01bda8da60b50e26fe46510cde0be85db8a99e79f9b19936455ee6e02e6",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_step2_v2_deterministic.log",
+      "bytes": 63342,
+      "sha256": "b912220b8a03a7596b6bf335a11f6e015400ee0090fb140982e2683a08d47cd1",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "git_status_final.txt",
+      "bytes": 60,
+      "sha256": "65e7b5a03ab832ba215a21c634d337b16ff3a7e43977e2b34239895a1776cda0",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "git_status_initial.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "input_sha256.txt",
+      "bytes": 276,
+      "sha256": "09be56f24b61b2d2a1e25a81d6be8ed581739fe72ee139708ce30664a92a7c51",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "input_sha256_final.txt",
+      "bytes": 276,
+      "sha256": "09be56f24b61b2d2a1e25a81d6be8ed581739fe72ee139708ce30664a92a7c51",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "packages_after_peft_fix.txt",
+      "bytes": 5526,
+      "sha256": "344a742e076358a2e840f18fc92a2c13d9bcdc0c2865560f6520fcb4e337a604",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "packages_before_peft_fix.txt",
+      "bytes": 5526,
+      "sha256": "f57adfb4c0bfc8cec3d5fb8fe6a2d796811df5be802a133620947356019705d1",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "peft_fix_check.log",
+      "bytes": 214,
+      "sha256": "2ca63037c00577b62a06fef321514d3710950a31dc48fde41fd46ed943c159e2",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "peft_fix_install.log",
+      "bytes": 190,
+      "sha256": "dbb9df30a5c895c94631a15d6cd599c72eb9cabb4211958b2127c30d9daa6e0c",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "pytest.log",
+      "bytes": 15967,
+      "sha256": "efae87960d752dd041f09aab958ed41b086c523abc9fd5ad9c1af8da98ee6356",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "pytest_after_peft_fix.log",
+      "bytes": 15967,
+      "sha256": "f08b930cfea9956f7cc98a6759443ee1f75cb6566c3be27f1cf76207da26b93a",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    },
+    {
+      "name": "source_commit.txt",
+      "bytes": 41,
+      "sha256": "2082d58aed506025e82501cfa86812c2824c5547a0e516c7dda272ba90777d28",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "summary.json",
+      "bytes": 2114,
+      "sha256": "8f48712f56e1aa48cffd6a86da3866e1268c3a58ddca24d93d38f26ad72f0d45",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "train_smoke_v1.log",
+      "bytes": 5975,
+      "sha256": "e98393bc28950af8784b494f1cb41ca8b8822b4c94681576dcce06bcda01816d",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "train_smoke_v1_peft018.log",
+      "bytes": 32368,
+      "sha256": "291d614dc71ab1ae034e48d7b541ffa90761a8873876f543e8c9f25bcabbe39a",
+      "copied_to_git": false,
+      "excluded_reason": "not-in-upload-allowlist"
+    }
+  ],
+  "missing_expected_files": [
+    "dependency_check.log",
+    "install.log",
+    "nvidia-smi.txt",
+    "packages.txt"
+  ]
+}
