@@ -1,0 +1,195 @@
+{
+  "run_id": "20261011T152440Z",
+  "source_commit": "09e2905f08e3e3d5a9dde8940ad782a4c08e4c35",
+  "checkpoint_source": "B-new-colab-lifecycle-smoke",
+  "notes": "待审查；成功或失败以原始日志、退出码和GPU记录为准。",
+  "artifact_location": "/content/drive/MyDrive/AgenticRL-exit-validation/20261011T152440Z",
+  "copied_bytes": 863607,
+  "artifacts": [
+    {
+      "name": "source_commit.txt",
+      "bytes": 41,
+      "sha256": "762bda772eeb673c0315586f651d73167ec01907e329143ee1522cc5c6761e79",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "checkpoint_source.txt",
+      "bytes": 28,
+      "sha256": "f066e59dcc88466ef7ff74d90d38bcd1ccd522ea867c2baffcf20f4cf9a957b5",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "git_status_final.txt",
+      "bytes": 60,
+      "sha256": "65e7b5a03ab832ba215a21c634d337b16ff3a7e43977e2b34239895a1776cda0",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "input_sha256.txt",
+      "bytes": 276,
+      "sha256": "09be56f24b61b2d2a1e25a81d6be8ed581739fe72ee139708ce30664a92a7c51",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "input_sha256_final.txt",
+      "bytes": 276,
+      "sha256": "09be56f24b61b2d2a1e25a81d6be8ed581739fe72ee139708ce30664a92a7c51",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "packages.txt",
+      "bytes": 5538,
+      "sha256": "22c68ff34b36b673cd854eef5c493c3fde1c421841392a33e9634394b1b278ae",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "packages_before_peft_fix.txt",
+      "bytes": 5538,
+      "sha256": "db3f342c342f4ef9b8a88a2d70ad5b894712b351083c8f9b74150a1f1f864a13",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "install.log",
+      "bytes": 6511,
+      "sha256": "368c0af3a7dfa0342d048b03adc6b0810599c0e5ba756ad0d1490a1bf5bd2e27",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "peft_fix_install.log",
+      "bytes": 204,
+      "sha256": "87028c2657a28ca8ca1060617c663f8e92b40103c1bcd80e8557e61962631eef",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "dependency_check.log",
+      "bytes": 128,
+      "sha256": "a455163066ba7acddedc0e10b5be907d48bb55d6b02ba20c7f4ffd259270abe3",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "backend_preflight.log",
+      "bytes": 434,
+      "sha256": "776c9f9a0d574a60eabfd180ebe6a17b5ecb35affc87bffe38dd85fe09f9d238",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "pytest.log",
+      "bytes": 260,
+      "sha256": "b1a26d91fb54efa85927f94bddcf8e5fef0ddc7fa689904ac63481f79dd53606",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "nvidia-smi.txt",
+      "bytes": 1689,
+      "sha256": "d645c2f3b2477bd7ab2e5de923355168475917f45e1114a6c5978379632dc71a",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "train_smoke_v1.log",
+      "bytes": 33825,
+      "sha256": "ea378e6a4f9f383e02e1bdcae30e10d71f1d108a5a5ef333905a339bcebbf4e7",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "train_exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "gpu_before_train.csv",
+      "bytes": 41,
+      "sha256": "cae79969ce448872401f5d9bcd1d52bbefa1a5450cf3a5658f62f068ab59294b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "gpu_after_train.csv",
+      "bytes": 41,
+      "sha256": "cae79969ce448872401f5d9bcd1d52bbefa1a5450cf3a5658f62f068ab59294b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_exit_check.log",
+      "bytes": 18981,
+      "sha256": "bbdd2fee24b70bc6d3dc18f0b9e54c679fd759610e4c20bf79f677bb1d4c24b8",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_exit_check.json",
+      "bytes": 5508,
+      "sha256": "b9c236121521d9a949e68fc30a886084fe2bc3daed8f4fdaaec49e130c0beb5f",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "gpu_before_eval.csv",
+      "bytes": 41,
+      "sha256": "cae79969ce448872401f5d9bcd1d52bbefa1a5450cf3a5658f62f068ab59294b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "gpu_after_eval.csv",
+      "bytes": 41,
+      "sha256": "cae79969ce448872401f5d9bcd1d52bbefa1a5450cf3a5658f62f068ab59294b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_step2_reward_audit.log",
+      "bytes": 120262,
+      "sha256": "1f19d0d96839d24d01d1d7ec5d92e40dc62522c633b2f14b4ced6306b5e7b2fd",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_step2_reward_audit.json",
+      "bytes": 663837,
+      "sha256": "899d1f37755ee20de064480d59dee9f2f3545a162029dd85b87f6d7bd909b7b4",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "eval_audit_exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "copied_to_git": true,
+      "excluded_reason": null
+    },
+    {
+      "name": "gpu_after_audit.csv",
+      "bytes": 41,
+      "sha256": "cae79969ce448872401f5d9bcd1d52bbefa1a5450cf3a5658f62f068ab59294b",
+      "copied_to_git": true,
+      "excluded_reason": null
+    }
+  ],
+  "missing_files": [
+    "packages_after_peft_fix.txt"
+  ]
+}

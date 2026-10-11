@@ -1,0 +1,7 @@
+Using Python 3.13.15 environment at: /content/agent-exit-venv
+Resolved 1 package in 1ms
+Prepared 1 package in 532ms
+Uninstalled 1 package in 4ms
+Installed 1 package in 5ms
+ - peft==0.21.2
+ + peft==0.18.0

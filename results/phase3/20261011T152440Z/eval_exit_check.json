@@ -1,0 +1,197 @@
+{
+  "step": 2,
+  "mode": "deterministic",
+  "reward_version": "v1",
+  "reward_version_definition": "rollout scoring version; not checkpoint training provenance",
+  "scenarios_path": "/tmp/agenticrl_lifecycle_scenario.jsonl",
+  "num_generations": 1,
+  "total_scenarios": 1,
+  "total_rollouts": 1,
+  "successes": 1,
+  "accuracy_pct": 100.0,
+  "avg_reward": 4.0,
+  "per_scenario": [
+    {
+      "scenario_index": 0,
+      "task": "Convert 98 kg to lbs.",
+      "mean_reward": 4.0,
+      "max_reward": 4.0,
+      "success_count": 1,
+      "total_attempts": 1,
+      "scenario_id": "simple_convert",
+      "attempts": [
+        {
+          "reward": 4.0,
+          "failed": false,
+          "complete_tool_chain": true,
+          "reward_comparison": {
+            "v1": 4.0,
+            "v2": 4.0,
+            "excluded_reason": null,
+            "v2_breakdown": {
+              "total": 4.0,
+              "format_score": 1.0,
+              "tool_score": 1.0,
+              "sequence_score": 1.5,
+              "argument_key_score": 1.0,
+              "argument_value_score": 1.5,
+              "dynamic_score": 0.0,
+              "completion_score": 1.0,
+              "baseline_score": -3.0,
+              "cap_penalty": 0.0,
+              "exact_sequence_match": 1.0,
+              "prefix_match": 1.0,
+              "tool_count_match": 1.0
+            }
+          },
+          "tool_trace": [
+            {
+              "name": "convert_units",
+              "arguments": {
+                "value": 98,
+                "from_unit": "kg",
+                "to_unit": "lbs"
+              },
+              "result": "216.0528",
+              "turn": 1
+            }
+          ]
+        }
+      ],
+      "expected_calls": [
+        {
+          "name": "convert_units",
+          "arguments": {
+            "value": 98,
+            "from_unit": "kg",
+            "to_unit": "lbs"
+          }
+        }
+      ]
+    }
+  ],
+  "sampling": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 512,
+    "require_logprobs": false
+  },
+  "batch_scenarios": 1,
+  "task_success_count": 1,
+  "infra_failure_rate": 0.0,
+  "valid_avg_reward": 4.0,
+  "success_definition": "reward > 2.0; not final-answer correctness",
+  "infra_policy": "failed attempts retained; task success rates are conservative when infra fails",
+  "has_infra_failures": false,
+  "deterministic_accuracy_pct": 100.0,
+  "complete_chain": {
+    "definition": "complete-tool-chain-v1; not final-answer correctness",
+    "overall": {
+      "total_scenarios": 1,
+      "total_rollouts": 1,
+      "successful_rollouts": 1,
+      "rollout_success_pct": 100.0,
+      "successful_scenarios": 1,
+      "task_success_pct": 100.0
+    },
+    "by_scenario_type": {
+      "simple_convert": {
+        "total_scenarios": 1,
+        "total_rollouts": 1,
+        "successful_rollouts": 1,
+        "rollout_success_pct": 100.0,
+        "successful_scenarios": 1,
+        "task_success_pct": 100.0
+      }
+    },
+    "by_tool_depth": {
+      "1-step": {
+        "total_scenarios": 1,
+        "total_rollouts": 1,
+        "successful_rollouts": 1,
+        "rollout_success_pct": 100.0,
+        "successful_scenarios": 1,
+        "task_success_pct": 100.0
+      }
+    }
+  },
+  "complete_chain_accuracy_pct": 100.0,
+  "reward_comparison": {
+    "same_trajectories": true,
+    "available_rollouts": 1,
+    "excluded_rollouts": 0,
+    "v1_avg_reward": 4.0,
+    "v2_avg_reward": 4.0,
+    "note": "Scorer comparison only; not evidence of model improvement. Failed/missing traces excluded."
+  },
+  "diagnostics": {
+    "total_rollouts": 1,
+    "valid_trajectories": 1,
+    "infra_failed_trajectories": 0,
+    "avg_reward": 4.0,
+    "valid_avg_reward": 4.0,
+    "avg_tools_per_rollout": 1.0,
+    "no_tool_rate": 0.0,
+    "model_failure_rate": 0.0,
+    "infra_failure_rate": 0.0,
+    "total_groups": 1,
+    "groups_with_two_valid": 0,
+    "groups_with_variance": 0,
+    "mean_group_std": 0.0
+  },
+  "accuracy_definition": "rollout reward > 2.0; all attempts",
+  "by_tool_depth": {
+    "1-step": {
+      "total_scenarios": 1,
+      "total_attempts": 1,
+      "success_count": 1,
+      "accuracy_pct": 100.0,
+      "avg_reward": 4.0,
+      "task_success_count": 1,
+      "task_success_pct": 100.0,
+      "diagnostics": {
+        "total_rollouts": 1,
+        "valid_trajectories": 1,
+        "infra_failed_trajectories": 0,
+        "avg_reward": 4.0,
+        "valid_avg_reward": 4.0,
+        "avg_tools_per_rollout": 1.0,
+        "no_tool_rate": 0.0,
+        "model_failure_rate": 0.0,
+        "infra_failure_rate": 0.0,
+        "total_groups": 1,
+        "groups_with_two_valid": 0,
+        "groups_with_variance": 0,
+        "mean_group_std": 0.0
+      },
+      "metric_name": "Deterministic Accuracy"
+    }
+  },
+  "by_scenario_type": {
+    "simple_convert": {
+      "total_scenarios": 1,
+      "total_attempts": 1,
+      "success_count": 1,
+      "accuracy_pct": 100.0,
+      "avg_reward": 4.0,
+      "task_success_count": 1,
+      "task_success_pct": 100.0,
+      "diagnostics": {
+        "total_rollouts": 1,
+        "valid_trajectories": 1,
+        "infra_failed_trajectories": 0,
+        "avg_reward": 4.0,
+        "valid_avg_reward": 4.0,
+        "avg_tools_per_rollout": 1.0,
+        "no_tool_rate": 0.0,
+        "model_failure_rate": 0.0,
+        "infra_failure_rate": 0.0,
+        "total_groups": 1,
+        "groups_with_two_valid": 0,
+        "groups_with_variance": 0,
+        "mean_group_std": 0.0
+      },
+      "metric_name": "Deterministic Accuracy"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+Python: 3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]
+openpipe-art 0.5.17
+torch 2.10.0
+vllm 0.17.0
+trl 0.20.0
+transformers 4.57.3
+unsloth 2026.3.3
+unsloth-zoo 2026.3.1
+peft 0.18.0
+torchao 0.15.0
+psutil 7.2.2
+Torch CUDA: 12.8
+GPU: NVIDIA A100-SXM4-40GB
+Backend and lifecycle imports OK
