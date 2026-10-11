@@ -113,7 +113,7 @@ Qwen / vLLM 生成工具调用
 
 ## 使用方式
 
-**Colab A100 请优先使用 [Phase 3 独立验证指南](docs/colab_phase3_validation_zh.md)**：包含 Drive 留档、隔离环境、原 checkpoint 恢复/新 smoke 分支及可复制实验命令。旧 notebook 含清空 `.art` 和 50-step 训练步骤，不适合直接用于本轮验收。
+**Colab A100 请优先使用 [Phase 3 独立验证指南](docs/colab_phase3_validation_zh.md)**：包含 SSH 拉取仓库、Drive 留档、隔离环境、原 checkpoint 恢复/新 smoke 分支、实验命令及 SSH 推送反馈。小型结果提交到独立 `feedback/<run-id>` 分支，大型 trace/checkpoint 留在 Drive，后续按清单下载分析。旧 notebook 含清空 `.art` 和 50-step 训练步骤，不适合直接用于本轮验收。
 
 ### 环境准备
 
