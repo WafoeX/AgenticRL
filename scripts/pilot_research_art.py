@@ -132,8 +132,42 @@ async def run_art(output: Path, original: dict, records: list, protocol: dict, r
         service = backend._services[name]  # inspected ART 0.5.17 implementation, not a portable API promise
         state = service._state
         loaded = state.peft_model
-        if getattr(loaded, "is_loaded_in_4bit", False) or getattr(loaded, "is_loaded_in_8bit", False):
-            raise ValueError("implicit quantized loader not allowed for this pilot")
+        # Unsloth 2026.3.3 sets is_loaded_in_8bit=True even for dense models
+        # (models/llama.py: DDP compatibility marker). Audit actual storage, not that flag.
+        base_model = loaded.get_base_model()
+        audit = {"is_loaded_in_4bit": bool(getattr(loaded, "is_loaded_in_4bit", False)),
+                 "is_loaded_in_8bit_marker": bool(getattr(loaded, "is_loaded_in_8bit", False)),
+                 "quantization_config_present": getattr(base_model.config, "quantization_config", None) is not None,
+                 "parameter_dtypes": {}, "projection_classes": {}, "projection_count": 0}
+        result["loader_quantization_audit"] = audit
+        if audit["is_loaded_in_4bit"] or audit["quantization_config_present"]:
+            raise ValueError("actual loader quantization flag/config not allowed")
+        if service.config["init_args"].get("load_in_4bit") or service.config["init_args"].get("load_in_8bit"):
+            raise ValueError("ART effective init args requested quantization")
+        if service.config["engine_args"].get("quantization") is not None:
+            raise ValueError("ART vLLM engine args requested quantization")
+        allowed = {torch.float16, torch.bfloat16, torch.float32}
+        for parameter_name, parameter in loaded.named_parameters():
+            if (type(parameter) is not torch.nn.Parameter or type(parameter.data) is not torch.Tensor
+                    or not parameter.is_floating_point() or parameter.dtype not in allowed):
+                raise ValueError("non-dense/quantized parameter storage: " + parameter_name)
+            dtype = str(parameter.dtype)
+            audit["parameter_dtypes"][dtype] = audit["parameter_dtypes"].get(dtype, 0) + 1
+        targets = {"q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"}
+        for module_name, module in base_model.named_modules():
+            if module_name.rsplit(".", 1)[-1] not in targets:
+                continue
+            dense = module.get_base_layer() if hasattr(module, "get_base_layer") else module
+            class_name = type(dense).__module__ + "." + type(dense).__name__
+            audit["projection_classes"][class_name] = audit["projection_classes"].get(class_name, 0) + 1
+            if type(dense) is not torch.nn.Linear or dense.weight.dtype != torch.bfloat16:
+                raise ValueError("expected dense BF16 base projection: " + module_name + " (" + class_name + ")")
+            audit["projection_count"] += 1
+        if audit["projection_count"] != base_model.config.num_hidden_layers * len(targets):
+            raise ValueError("base projection audit coverage mismatch")
+        if not audit["parameter_dtypes"]:
+            raise ValueError("empty loader parameter audit")
+        write_json(output / "loader_quantization_audit.json", audit)
         active = list(loaded.active_adapters)
         if len(active) != 1:
             raise ValueError("expected exactly one active SFT adapter in ART loader")

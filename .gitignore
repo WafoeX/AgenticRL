@@ -6,6 +6,8 @@ docs/launch/
 __pycache__/
 *.pyc
 .pytest_cache/
+# Generated Unsloth runtime cache (not source)
+/unsloth_compiled_cache/
 
 # ART training state (regenerated each run)
 .art/
