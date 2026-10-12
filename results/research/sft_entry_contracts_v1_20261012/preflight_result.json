@@ -1,0 +1,14 @@
+{
+  "ART_vLLM_verified": false,
+  "GPU_requested": false,
+  "actual_updates": 0,
+  "budget": null,
+  "commit": "09e2905f08e3e3d5a9dde8940ad782a4c08e4c35",
+  "formal_training": false,
+  "pid": 63876,
+  "planned_updates": 0,
+  "started_at": "2026-10-12T07:18:34.232400+00:00",
+  "status": "preflight-passed-no-model-load",
+  "training_performed": false,
+  "wall_seconds": 2.5316859579179436
+}

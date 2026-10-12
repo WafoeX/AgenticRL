@@ -11,3 +11,9 @@ __pycache__/
 .art/
 checkpoints/
 training.log
+
+# Rebuildable SFT preprocessing and model weights (keep checkpoints on Drive)
+/data/research_sft_v1/
+*.safetensors
+*.pt
+*.pth

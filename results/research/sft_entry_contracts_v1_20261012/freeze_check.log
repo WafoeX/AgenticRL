@@ -1,0 +1,2 @@
+PASS: {"GPU_started": false, "counts": {"test": 240, "train": 1200, "validation": 180}, "decision_registration_locked": true, "final_test_ready": false, "formal_training_ready": false, "frozen_directory": "data/research_v1_frozen", "model_inference": false, "registration_id": "research-preregistration-v1-20261012", "test_labels_parsed": false, "test_operationally_frozen": true, "test_sha256": "08040a4e2e7b7c410f17937496a22bccd09f925e4c5dba35da2f027380410a52"}
+NOTE: budget/readiness annex and separate authorization required; no training/GPU/model inference

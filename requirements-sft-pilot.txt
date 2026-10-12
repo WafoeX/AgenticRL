@@ -1,0 +1,15 @@
+# Isolated SFT/Transformers compatibility pilot ONLY.
+# Do not install into the ART/Unsloth environment or replace notebook kernel torch.
+# These direct runtime versions match the locally exercised CPU/tokenizer environment;
+# A100 CUDA execution remains to be verified by the user.
+torch==2.8.0
+transformers==4.57.1
+peft==0.17.1
+safetensors==0.8.0
+huggingface-hub==0.36.2
+accelerate==1.15.0
+tokenizers==0.22.2
+pytest==8.4.2
+pytest-asyncio==1.2.0
+psutil==7.0.0
+PyYAML==6.0.2

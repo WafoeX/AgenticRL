@@ -1,0 +1,19 @@
+{
+  "protocol_version": "research-eval-v1",
+  "modes": ["deterministic", "sample"],
+  "sample_k": 8,
+  "seed": 20261011,
+  "deterministic": {"temperature": 0.0, "top_p": 1.0},
+  "sample": {"temperature": 1.2, "top_p": 0.95},
+  "max_turns": 6,
+  "max_calls_per_turn": 8,
+  "max_new_tokens_per_turn": 512,
+  "max_output_tokens_per_attempt": 2048,
+  "max_prompt_tokens": 4096,
+  "request_timeout_seconds": 60,
+  "concurrency": 1,
+  "chat_template_policy": "exact-local-tokenizer-no-override",
+  "tool_codec": "qwen-tool-tags-v1",
+  "infra_policy": "retain-all-no-retry-invalidate-comparison",
+  "test_policy": "development-only-reject-test"
+}

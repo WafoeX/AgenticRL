@@ -1,0 +1,39 @@
+{
+  "dataset_version": "research-v1-candidate",
+  "seed": 20261011,
+  "candidate_pool_per_recipe_domain": 1024,
+  "domains": {
+    "base": {"operand_base": 10, "temperature_base": -10, "population_base": 1000000, "area_base": 100, "gdp_base": 1000, "birth_base": 1900, "target_base": 2020, "distance_base": 100, "conversion_base": 1, "scale_base": 2, "offset_base": 1},
+    "val_ood": {"operand_base": 5010, "temperature_base": 25, "population_base": 10000000, "area_base": 2000, "gdp_base": 10000, "birth_base": 1800, "target_base": 2100, "distance_base": 1000, "conversion_base": 5001, "scale_base": 12, "offset_base": 101},
+    "test_ood": {"operand_base": 10010, "temperature_base": 60, "population_base": 100000000, "area_base": 5000, "gdp_base": 100000, "birth_base": 1700, "target_base": 2200, "distance_base": 10000, "conversion_base": 10001, "scale_base": 22, "offset_base": 201}
+  },
+  "buckets": [
+    {"split": "train", "generalization": "train", "domain": "base", "wording": "train", "depth_counts": [360, 480, 360]},
+    {"split": "validation", "generalization": "iid", "domain": "base", "wording": "train", "depth_counts": [36, 36, 18]},
+    {"split": "validation", "generalization": "parameter", "domain": "val_ood", "wording": "train", "depth_counts": [9, 12, 9]},
+    {"split": "validation", "generalization": "wording", "domain": "base", "wording": "validation", "depth_counts": [9, 12, 9]},
+    {"split": "validation", "generalization": "composition", "domain": "base", "wording": "train", "depth_counts": [0, 12, 18]},
+    {"split": "test", "generalization": "iid", "domain": "base", "wording": "train", "depth_counts": [24, 24, 12]},
+    {"split": "test", "generalization": "parameter", "domain": "test_ood", "wording": "train", "depth_counts": [24, 24, 12]},
+    {"split": "test", "generalization": "wording", "domain": "base", "wording": "test", "depth_counts": [24, 24, 12]},
+    {"split": "test", "generalization": "composition", "domain": "base", "wording": "train", "depth_counts": [0, 24, 36]}
+  ],
+  "recipes": {
+    "simple_math": {"depth": 1, "partition": "train", "tools": ["calculator"], "wordings": ["Calculate {a} {op} {b}.", "Give the result of applying {op} to {a} and {b}, in that order.", "Evaluate this arithmetic expression: ({a} {op} {b})."]},
+    "simple_weather": {"depth": 1, "partition": "train", "tools": ["get_weather"], "wordings": ["What is the temperature of {entity} in Celsius?", "Report the Celsius temperature recorded for {entity}.", "For {entity}, retrieve the temperature; use Celsius."]},
+    "simple_search": {"depth": 1, "partition": "train", "tools": ["search"], "wordings": ["What distance_km is recorded for {entity}?", "Find {entity}'s distance_km measurement in the synthetic index.", "Read the distance_km field associated with {entity}."]},
+    "simple_convert": {"depth": 1, "partition": "train", "tools": ["convert_units"], "wordings": ["Convert {value} {from_unit} to {to_unit}.", "Express a quantity of {value} {from_unit} using {to_unit}.", "In {to_unit}, how much is {value} {from_unit}?"]},
+    "simple_lookup": {"depth": 1, "partition": "train", "tools": ["lookup_db"], "wordings": ["What is {entity}'s gdp_billion_usd?", "Retrieve gdp_billion_usd for {entity} from countries.", "In billions of USD, report the GDP recorded for {entity}."]},
+    "age_calculation": {"depth": 2, "partition": "train", "tools": ["search", "calculator"], "wordings": ["For {entity}, subtract birth_year from {year}; report the year difference.", "Find {entity}'s birth_year and calculate {year} minus that year (not exact age).", "How many calendar years separate {entity}'s birth_year and {year}? Subtract birth_year from {year}."]},
+    "weather_convert": {"depth": 2, "partition": "train", "tools": ["get_weather", "convert_units"], "wordings": ["What is {entity}'s temperature in Fahrenheit?", "Express the recorded temperature of {entity} in Fahrenheit.", "Using Fahrenheit, report how warm {entity} is."]},
+    "population_math": {"depth": 2, "partition": "train", "tools": ["lookup_db", "calculator"], "wordings": ["Divide {entity}'s population by area_km2; report people_per_km2.", "For {entity}, compute population density per square kilometre from population and area_km2.", "How many people per km2 does {entity} have? Use population / area_km2."]},
+    "search_and_convert": {"depth": 2, "partition": "train", "tools": ["search", "convert_units"], "wordings": ["Convert the distance_km recorded for {entity} to miles.", "Find {entity}'s distance_km and express that measurement in miles.", "In miles, what distance corresponds to {entity}'s distance_km fact?"]},
+    "weather_compare": {"depth": 2, "partition": "train", "tools": ["get_weather", "get_weather"], "wordings": ["Which has higher Celsius temperature, {entity} or {entity_b}? Return the entity, or tie.", "Compare temperatures for {entity} and {entity_b}; identify the warmer entity (tie if equal).", "Between {entity} and {entity_b}, name the one with greater Celsius temperature; equal values mean tie."]},
+    "country_compare": {"depth": 2, "partition": "train", "tools": ["lookup_db", "lookup_db"], "wordings": ["Which has larger population, {entity} or {entity_b}? Return the entity, or tie.", "Compare population counts for {entity} and {entity_b}; give the larger entity or tie.", "Of {entity} and {entity_b}, name the more populous entity; equal populations mean tie."]},
+    "country_density_convert": {"depth": 3, "partition": "train", "tools": ["lookup_db", "calculator", "convert_units"], "wordings": ["What is {entity}'s population density in people_per_mile2?", "Calculate population / area_km2 for {entity}, then express density per square mile.", "For {entity}, report people per square mile using population and area_km2."]},
+    "gdp_scale": {"depth": 2, "partition": "validation", "tools": ["lookup_db", "calculator"], "wordings": ["Multiply {entity}'s gdp_billion_usd by {scale}; keep billion_usd.", "Scale {entity}'s GDP in billions of USD by {scale}.", "Report {scale} times the gdp_billion_usd of {entity}."]},
+    "weather_offset_convert": {"depth": 3, "partition": "validation", "tools": ["get_weather", "calculator", "convert_units"], "wordings": ["Add {offset} Celsius to {entity}'s Celsius temperature, then convert to Fahrenheit.", "For {entity}, increase the Celsius temperature by {offset}; report Fahrenheit.", "In Fahrenheit, express {entity}'s Celsius temperature plus {offset} Celsius."]},
+    "measurement_scale": {"depth": 2, "partition": "test", "tools": ["search", "calculator"], "wordings": ["Multiply {entity}'s distance_km by {scale}; report km.", "Scale the distance_km measurement of {entity} by {scale}.", "Report {scale} times {entity}'s recorded distance in km."]},
+    "distance_offset_convert": {"depth": 3, "partition": "test", "tools": ["search", "calculator", "convert_units"], "wordings": ["Add {offset} km to {entity}'s distance_km, then convert to miles.", "Find {entity}'s distance_km, increase it by {offset} km, and report miles.", "In miles, express the distance_km of {entity} plus {offset} km."]}
+  }
+}

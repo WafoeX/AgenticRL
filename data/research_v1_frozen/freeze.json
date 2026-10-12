@@ -1,0 +1,69 @@
+{
+  "counts": {
+    "test": 240,
+    "train": 1200,
+    "validation": 180
+  },
+  "files": {
+    "DATA_CARD.md": {
+      "bytes": 2999,
+      "sha256": "7464ca7db9e9aa30ba3cec0ad2797e0ec5f9030ea39291d942107549b8a089b8"
+    },
+    "audit.json": {
+      "bytes": 14268,
+      "sha256": "997301b7fcf626a469451d81e8b3afd2c8d10f467e8f62b6ee33021a8e02acd8"
+    },
+    "manifest.json": {
+      "bytes": 3097,
+      "sha256": "c8901d81e25fd80c600525c4f53ac7dcec2e3cf21bee0cb340c8d9818c3a4dde"
+    },
+    "test.jsonl": {
+      "bytes": 671344,
+      "sha256": "08040a4e2e7b7c410f17937496a22bccd09f925e4c5dba35da2f027380410a52"
+    },
+    "train.jsonl": {
+      "bytes": 3395496,
+      "sha256": "b98fc61cfae88426e065ff817db9757650944c76f3268298de82eb76a097048e"
+    },
+    "validation.jsonl": {
+      "bytes": 507864,
+      "sha256": "941132e1c93ce26cba6417eac7892c11b7c64c2fc14d3c21b02902e1dff70261"
+    }
+  },
+  "history": {
+    "after_test_consumption": "no-retuning-with-unseen-test-claim-versioned-new-study-required",
+    "claim": "operational-self-built-holdout-not-external-blind-test",
+    "known_prior_model_test_inference": false,
+    "labels_locally_accessible": true,
+    "programmatic_construction_structure_solvability_leakage_audit": true
+  },
+  "note": "Original six files preserved byte-for-byte, including candidate manifest; this separate freeze record is release authority, not cryptographic access control.",
+  "original_record_version": "research-v1-candidate",
+  "preregistration_sha256": "f0d5e8a8bd36f3c4b74a7f482d6cd51523e2b5300ed514a7f04614095456ff76",
+  "registration_id": "research-preregistration-v1-20261012",
+  "release_id": "research-v1-frozen-20261012",
+  "source_hashes": {
+    "configs/research/dataset_v1.json": "bc976bccef363fd35c8165911a69be59866ae047778a5eec9941ed05a32cae25",
+    "configs/research/evaluation_v1.json": "e56234811ee6686ea80d090c8ead5de97077bbde76f79227044b91cc1c0c4eaf",
+    "configs/research/schema_v1.json": "f974c7c9cf147fad77ca138053208b027d4a15a598166b5581bd9c575b0fd9d2",
+    "docs/research_preregistration_v1_zh.md": "b0b56b98890bbb1c57ad46c8e86eb25c7122df0ffb929aec78de20a0a798c6d2",
+    "scripts/eval_research.py": "63d447fda95296fe5c2c06c5550d25f3bab8212e3982dceda5fcb7b1b0b6652b",
+    "scripts/freeze_research.py": "c7e3640233efd2603f4aeed3c5a6057aaa8386add673291c94b9d917f44f788c",
+    "scripts/generate_research_dataset.py": "311328b8158ce6c101785b07dc2d48e101993ce3502ddae2d7516a25f9744c9e",
+    "src/research_answers.py": "03217a56ed93fe17652085c52d096cbd6b7f34bfa76df01efd653748977c5b50",
+    "src/research_audit.py": "ab1482a25754528e4b1acaa0a59e99177091a94e5cacf8196f6063edca474bb0",
+    "src/research_checker.py": "3c648bb8c0d6ca1943bf577c06de036d3fd56379c4973bf9c9fdb3c162d6036b",
+    "src/research_environment.py": "0ffa952b359476de127169c6cbdaba898599b1fe4cc257aefe1a8f9982ca0d4e",
+    "src/research_eval_backend.py": "4cfd5e7122220626b65e3ae8b28b47c906230970c6086a7a6539b7771f544746",
+    "src/research_eval_metrics.py": "1741e83f347cb7fc1d7cb34c1957c517892a43b0b5c4dfc412068758b56e70c8",
+    "src/research_eval_protocol.py": "f5860d15649834449ffcb5da451a2bbb7e7d12d5a5bd41fc2f40e534fb2c30fc",
+    "src/research_evaluation.py": "5b9dbfeeb7f519001ddbe23cff6cc893673ccface98e4bd2792a8176f4c64fd4",
+    "src/research_generator.py": "43af16f91e57e001cad0ce50e0a2208ab3937e80a3daacae678804996c959aad",
+    "src/research_model_identity.py": "8e35e9d735db6850f0614c54aeef5d0d223cd58df1cfee61e96fde012aa20720",
+    "src/research_registration.py": "3ec8f6e5354091326a6b6f27f9b17a7868703d2f24fb343ec7bced7cfd9dd884",
+    "src/research_schema.py": "27b9f40c2f72f8eea36ab9472838349f2b8f7af13528a93091b46015cd15775e",
+    "tests/test_research_registration.py": "3dc6d6f3f3f6dc0389ecb865e608fef3a29391bf219fadfddfaa3aebe29629d9"
+  },
+  "test_access": "closed-no-model-inference-until-separate-final-cohort-authorization",
+  "version": "research-operational-freeze-v1"
+}

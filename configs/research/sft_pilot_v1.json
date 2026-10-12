@@ -1,0 +1,23 @@
+{
+  "version": "research-sft-pilot-v1",
+  "base_model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "seed": 20261011,
+  "max_length": 4096,
+  "selection": "first-train-record-per-depth-1-2-3",
+  "updates": 2,
+  "batch_size": 3,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0,
+  "max_grad_norm": 1.0,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.0,
+  "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+  "dtype": "bfloat16",
+  "attention": "eager",
+  "max_wall_seconds": 600,
+  "reload_logit_atol": 0.02,
+  "reload_logit_rtol": 0.002,
+  "purpose": "compatibility-only-not-formal-SFT-not-checkpoint-selection"
+}

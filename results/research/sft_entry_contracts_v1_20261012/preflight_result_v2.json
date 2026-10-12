@@ -1,0 +1,21 @@
+{
+  "ART_vLLM_verified": false,
+  "GPU_requested": false,
+  "actual_updates": 0,
+  "budget": null,
+  "commit": "09e2905f08e3e3d5a9dde8940ad782a4c08e4c35",
+  "formal_training": false,
+  "pid": 66597,
+  "planned_updates": 0,
+  "source_hashes": {
+    "configs/research/sft_pilot_v1.json": "e469431f7a5587eccdc7088b0d8f2980cb99f8b3faa32dbdf3113d4473bc8d33",
+    "requirements-sft-pilot.txt": "d3783157afbbaa9e1293d89467b1958f7aea7ea2da56e55afcc9c6ee17af3b05",
+    "scripts/pilot_research_sft.py": "c024f89cae9cb31c53b6f2bc419fef949987ebab25d21dd7b593a3492ea7d3c1",
+    "src/research_sft.py": "cfad229f4ee23615cfa9935608383a79d95987e6ef1a0ff7d48f730aee64dea7",
+    "src/research_sft_pilot.py": "47c0a90d7e1a12438ea5f412e093457a3d5f4dec219e2bd79bb2809a7908c33c"
+  },
+  "started_at": "2026-10-12T07:33:53.370846+00:00",
+  "status": "preflight-passed-no-model-load",
+  "training_performed": false,
+  "wall_seconds": 2.5311057921499014
+}
