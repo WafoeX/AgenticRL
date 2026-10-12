@@ -1,0 +1,2 @@
+{"changed_tensors_from_initial": 168, "changed_tensors_this_update": 168, "grad_norm_before_clip": 3.5322704315185547, "loss": 0.5168339610099792, "manual_masked_loss": 0.5168339014053345, "shifted_supervised_tokens": 293, "step": 1}
+{"changed_tensors_from_initial": 336, "changed_tensors_this_update": 336, "grad_norm_before_clip": 2.6470439434051514, "loss": 0.41907161474227905, "manual_masked_loss": 0.41907161474227905, "shifted_supervised_tokens": 293, "step": 2}

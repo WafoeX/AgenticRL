@@ -1,0 +1,329 @@
+{
+  "experts": [
+    {
+      "checks": {
+        "answer": {
+          "correct": true,
+          "parsed": {
+            "unit": "people_per_km2",
+            "value": 188.417853
+          },
+          "reason": "correct",
+          "version": "research-answer-v1"
+        },
+        "trace": {
+          "dynamic_status": "not_applicable",
+          "errors": [],
+          "execution_valid": true,
+          "matched_steps": [
+            0
+          ],
+          "semantic_valid": true,
+          "strict_complete": true,
+          "version": "research-trace-v1"
+        }
+      },
+      "messages": [
+        {
+          "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+          "role": "system"
+        },
+        {
+          "content": "Convert 488 people_per_mile2 to people_per_km2.",
+          "role": "user"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "from_unit": "people_per_mile2",
+                  "to_unit": "people_per_km2",
+                  "value": 488
+                },
+                "name": "convert_units"
+              },
+              "id": "expert-turn-0-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "188.417853",
+          "role": "tool",
+          "tool_call_id": "expert-turn-0-call-0"
+        },
+        {
+          "content": "{\"unit\":\"people_per_km2\",\"value\":188.417853}",
+          "role": "assistant"
+        }
+      ],
+      "recipe_id": "simple_convert",
+      "reference_depth": 1,
+      "sample_id": "rv1-49a182bec59c8280e81eeeb2124e5aeb69672f51b15ca19416549fa7bf0933fd",
+      "semantic_group_id": "49a182bec59c8280e81eeeb2124e5aeb69672f51b15ca19416549fa7bf0933fd",
+      "split": "train",
+      "trace": [
+        {
+          "arguments": {
+            "from_unit": "people_per_mile2",
+            "to_unit": "people_per_km2",
+            "value": 488
+          },
+          "name": "convert_units",
+          "observation": "188.417853",
+          "turn": 0
+        }
+      ],
+      "version": "research-sft-data-v1"
+    },
+    {
+      "checks": {
+        "answer": {
+          "correct": true,
+          "parsed": {
+            "unit": "years",
+            "value": 78
+          },
+          "reason": "correct",
+          "version": "research-answer-v1"
+        },
+        "trace": {
+          "dynamic_status": "valid",
+          "errors": [],
+          "execution_valid": true,
+          "matched_steps": [
+            0,
+            1
+          ],
+          "semantic_valid": true,
+          "strict_complete": true,
+          "version": "research-trace-v1"
+        }
+      },
+      "messages": [
+        {
+          "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+          "role": "system"
+        },
+        {
+          "content": "For Fiction-8654c188ab72f853, subtract birth_year from 2028; report the year difference.",
+          "role": "user"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "query": "Fiction-8654c188ab72f853 birth_year"
+                },
+                "name": "search"
+              },
+              "id": "expert-turn-0-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "[{\"entity\":\"Fiction-8654c188ab72f853\",\"field\":\"birth_year\",\"unit\":\"years\",\"value\":1950}]",
+          "role": "tool",
+          "tool_call_id": "expert-turn-0-call-0"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "expression": "2028-1950"
+                },
+                "name": "calculator"
+              },
+              "id": "expert-turn-1-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "78.0",
+          "role": "tool",
+          "tool_call_id": "expert-turn-1-call-0"
+        },
+        {
+          "content": "{\"unit\":\"years\",\"value\":78.0}",
+          "role": "assistant"
+        }
+      ],
+      "recipe_id": "age_calculation",
+      "reference_depth": 2,
+      "sample_id": "rv1-16ec63ee12f90480997b809bb5b13892616e4c634c5f340f8e40d8ae84c59acb",
+      "semantic_group_id": "16ec63ee12f90480997b809bb5b13892616e4c634c5f340f8e40d8ae84c59acb",
+      "split": "train",
+      "trace": [
+        {
+          "arguments": {
+            "query": "Fiction-8654c188ab72f853 birth_year"
+          },
+          "name": "search",
+          "observation": "[{\"entity\":\"Fiction-8654c188ab72f853\",\"field\":\"birth_year\",\"unit\":\"years\",\"value\":1950}]",
+          "turn": 0
+        },
+        {
+          "arguments": {
+            "expression": "2028-1950"
+          },
+          "name": "calculator",
+          "observation": "78.0",
+          "turn": 1
+        }
+      ],
+      "version": "research-sft-data-v1"
+    },
+    {
+      "checks": {
+        "answer": {
+          "correct": true,
+          "parsed": {
+            "unit": "people_per_mile2",
+            "value": 20005.76765
+          },
+          "reason": "correct",
+          "version": "research-answer-v1"
+        },
+        "trace": {
+          "dynamic_status": "valid",
+          "errors": [],
+          "execution_valid": true,
+          "matched_steps": [
+            0,
+            1,
+            2
+          ],
+          "semantic_valid": true,
+          "strict_complete": true,
+          "version": "research-trace-v1"
+        }
+      },
+      "messages": [
+        {
+          "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+          "role": "system"
+        },
+        {
+          "content": "What is Fiction-2ea6d9287ddbbe13's population density in people_per_mile2?",
+          "role": "user"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "key": "Fiction-2ea6d9287ddbbe13",
+                  "table": "countries"
+                },
+                "name": "lookup_db"
+              },
+              "id": "expert-turn-0-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "{\"area_km2\":137,\"gdp_billion_usd\":2275,\"population\":1058225}",
+          "role": "tool",
+          "tool_call_id": "expert-turn-0-call-0"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "expression": "1058225/137"
+                },
+                "name": "calculator"
+              },
+              "id": "expert-turn-1-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "7724.270072992701",
+          "role": "tool",
+          "tool_call_id": "expert-turn-1-call-0"
+        },
+        {
+          "content": null,
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": {
+                  "from_unit": "people_per_km2",
+                  "to_unit": "people_per_mile2",
+                  "value": 7724.270072992701
+                },
+                "name": "convert_units"
+              },
+              "id": "expert-turn-2-call-0",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "20005.76765",
+          "role": "tool",
+          "tool_call_id": "expert-turn-2-call-0"
+        },
+        {
+          "content": "{\"unit\":\"people_per_mile2\",\"value\":20005.76765}",
+          "role": "assistant"
+        }
+      ],
+      "recipe_id": "country_density_convert",
+      "reference_depth": 3,
+      "sample_id": "rv1-4aa96010a83ca55c8448f06de7eae081ed15dd23b95fafc1352874eef46b58f3",
+      "semantic_group_id": "4aa96010a83ca55c8448f06de7eae081ed15dd23b95fafc1352874eef46b58f3",
+      "split": "train",
+      "trace": [
+        {
+          "arguments": {
+            "key": "Fiction-2ea6d9287ddbbe13",
+            "table": "countries"
+          },
+          "name": "lookup_db",
+          "observation": "{\"area_km2\":137,\"gdp_billion_usd\":2275,\"population\":1058225}",
+          "turn": 0
+        },
+        {
+          "arguments": {
+            "expression": "1058225/137"
+          },
+          "name": "calculator",
+          "observation": "7724.270072992701",
+          "turn": 1
+        },
+        {
+          "arguments": {
+            "from_unit": "people_per_km2",
+            "to_unit": "people_per_mile2",
+            "value": 7724.270072992701
+          },
+          "name": "convert_units",
+          "observation": "20005.76765",
+          "turn": 2
+        }
+      ],
+      "version": "research-sft-data-v1"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "policy": "user-amendment-v2-no-manual-budget-gate",
+  "metering_started_at": "2026-10-12T08:00:00.961411+00:00",
+  "actual_gpu_allocation_time": null,
+  "remaining_gpu_hours": null,
+  "total_GPU_budget_verified": false
+}
