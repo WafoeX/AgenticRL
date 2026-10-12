@@ -24,7 +24,6 @@ from src.research_model_identity import (
 from src.research_schema import load_json
 from src.research_sft_pilot import (
     CONFIG,
-    check_budget,
     prepare,
     tensor_fingerprint,
     train_updates,
@@ -67,16 +66,19 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--run-gpu", action="store_true")
     parser.add_argument("--confirm-pilot-only", action="store_true")
-    parser.add_argument("--remaining-gpu-hours", type=float)
-    parser.add_argument("--gpu-allocated-at")
+    parser.add_argument("--remaining-gpu-hours", type=float, help="Deprecated; ignored (no manual budget gate)")
+    parser.add_argument("--gpu-allocated-at", help="Deprecated; ignored (no manual allocation-time gate)")
     args = parser.parse_args()
     if args.output.resolve().is_relative_to(ROOT):
         raise ValueError("run output must be outside repository/frozen evidence")
     budget = None
     if args.run_gpu:
-        if not args.confirm_pilot_only or args.remaining_gpu_hours is None or not args.gpu_allocated_at:
-            raise ValueError("GPU requires explicit pilot-only confirmation, remaining budget and allocation timestamp")
-        budget = check_budget(args.remaining_gpu_hours, args.gpu_allocated_at)
+        if not args.confirm_pilot_only:
+            raise ValueError("GPU requires explicit pilot-only confirmation")
+        budget = {"policy": "user-amendment-v2-no-manual-budget-gate", "total_GPU_budget_verified": False,
+                  "actual_allocation_time": None, "prior_GPU_consumption": None,
+                  "metering_scope": "this-pilot-process-only", "wall_seconds_cap": CONFIG["max_wall_seconds"],
+                  "legacy_budget_arguments_ignored": args.remaining_gpu_hours is not None or args.gpu_allocated_at is not None}
         if subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip():
             raise ValueError("GPU pilot requires a clean versioned checkout")
     args.output.mkdir(parents=True, exist_ok=False)
@@ -99,8 +101,7 @@ def main():
         if not args.run_gpu:
             result["status"] = "preflight-passed-no-model-load"
             return
-        # Preprocessing/setup spent since allocation remains part of the same budget.
-        result["budget_at_load"] = check_budget(args.remaining_gpu_hours, args.gpu_allocated_at)
+        # User removed the manual allocation gate; prior/session-wide costs remain unknown.
         torch = importlib.import_module("torch")
         transformers = importlib.import_module("transformers")
         peft = importlib.import_module("peft")
@@ -196,9 +197,8 @@ def main():
             result["peak_allocated_bytes"] = torch.cuda.max_memory_allocated()
             torch.cuda.empty_cache()
         result["wall_seconds"] = time.monotonic() - begun
-        if args.gpu_allocated_at:
-            allocation = datetime.fromisoformat(args.gpu_allocated_at.replace("Z", "+00:00"))
-            result["allocated_GPU_hours_to_end"] = (datetime.now(timezone.utc) - allocation).total_seconds() / 3600
+        result["pilot_process_wall_hours"] = result["wall_seconds"] / 3600
+        result["ended_at"] = datetime.now(timezone.utc).isoformat()
         write_json(args.output / "result.json", result)
         print(json.dumps(result, sort_keys=True), flush=True)
 

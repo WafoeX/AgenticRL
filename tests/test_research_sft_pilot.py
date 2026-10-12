@@ -1,6 +1,7 @@
 """Bounded pilot contracts. Tiny synthetic CPU tensors only, never pretrained training."""
 
 import copy
+import json
 import os
 import subprocess
 import sys
@@ -9,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from scripts import pilot_research_sft as pilot_cli
 from src.research_schema import load_json
 from src.research_sft import pad_batch
 from src.research_sft_pilot import (
@@ -115,6 +117,29 @@ def test_gpu_gate_before_dependency_or_output(tmp_path):
                             capture_output=True, text=True, cwd=ROOT)
     assert result.returncode != 0 and "explicit pilot-only" in result.stderr
     assert not target.exists()
+
+
+@pytest.mark.parametrize("legacy", [[], ["--gpu-allocated-at", "2099-01-01T00:00:00Z"],
+                                   ["--remaining-gpu-hours", "0", "--gpu-allocated-at", "not-a-date"]])
+def test_gpu_entry_needs_no_manual_budget_or_timestamp(monkeypatch, tmp_path, legacy):
+    target = tmp_path / "run"
+    monkeypatch.setattr(sys, "argv", ["pilot", "--base-dir", str(tmp_path / "base"),
+                                    "--output", str(target), "--run-gpu", "--confirm-pilot-only", *legacy])
+    monkeypatch.setattr(pilot_cli.subprocess, "check_output",
+                        lambda command, **kwargs: "" if "status" in command else "fixture-commit")
+
+    def reached_prepare(*args):
+        raise RuntimeError("preflight reached without manual budget gate")
+
+    monkeypatch.setattr(pilot_cli, "prepare", reached_prepare)
+    with pytest.raises(RuntimeError, match="preflight reached"):
+        pilot_cli.main()
+    result = json.loads((target / "result.json").read_text())
+    assert result["budget"]["total_GPU_budget_verified"] is False
+    assert result["budget"]["actual_allocation_time"] is None
+    assert result["actual_updates"] == 0
+    assert result["pilot_process_wall_hours"] >= 0
+    assert "allocated_GPU_hours_to_end" not in result
 
 
 def test_tiny_cpu_optimizer_loss_and_failure_contracts():

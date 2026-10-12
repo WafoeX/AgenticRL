@@ -41,9 +41,9 @@ Colab中若需跨单元格继承，在Python格使用：
 os.environ['GIT_SSH_COMMAND'] = 'ssh -o ConnectTimeout=15 -o HostName=ssh.github.com -p 443 -o HostKeyAlias=github.com'
 ```
 
-## 2. Colab 设置路径与预算（Python 单元格）
+## 2. Colab 设置路径（Python 单元格，无手填预算）
 
-选择 A100；在第一格记录**实际 GPU 分配时间**，不是训练开始时间。之前的安装、下载、空闲都计入 20 GPU 小时。不要把示例上限当剩余额度。先前消耗须从总额扣除；无法核对余额时停止。
+按用户后续要求，已取消手填余额、分配时间及其启动断言。自动记录本格开始时间与程序运行耗时；这不代表实际 GPU 分配时间，总预算和此前消耗均记为未知。两次更新、600秒超时、显式pilot确认仍保留。此变更只适用于该开发pilot，不改原冻结协议或授权正式训练。
 
 ```python
 import os, sys, shutil, subprocess
@@ -53,12 +53,7 @@ from google.colab import drive
 
 assert sys.version_info >= (3, 11)
 subprocess.run(['nvidia-smi'], check=True)
-remaining = float(input('这次 GPU 分配时的实际剩余 GPU 小时（已扣除历史消耗）：'))
-allocated = input('实际 GPU 分配 UTC 时间，例 YYYY-MM-DDTHH:MM:SSZ：').strip()
-started = datetime.fromisoformat(allocated.replace('Z', '+00:00'))
-assert started.tzinfo is not None
-assert 0 < remaining <= 20
-assert 0 <= (datetime.now(timezone.utc) - started).total_seconds() < remaining * 3600
+metering_started = datetime.now(timezone.utc).isoformat()
 
 drive.mount('/content/drive')
 repo = Path('/content/AgenticRL-sft-pilot-v1')
@@ -67,15 +62,15 @@ run.mkdir(parents=True, exist_ok=False)
 assert shutil.disk_usage('/content').free >= 15 * 1024**3, '本地空间不足，先停'
 assert shutil.disk_usage(run).free >= 4 * 1024**3, 'Drive 可用空间不足，先停'
 os.environ.update(SFT_REPO=str(repo), SFT_RUN=str(run),
-                  SFT_PY='/content/sft-pilot-venv/bin/python',
-                  SFT_REMAINING_HOURS=str(remaining), SFT_GPU_ALLOCATED_AT=allocated)
+                  SFT_PY='/content/sft-pilot-venv/bin/python')
 (run / 'allocation.json').write_text(__import__('json').dumps({
-    'remaining_hours_at_allocation': remaining, 'allocated_at': allocated,
-    'first_recorded_at': datetime.now(timezone.utc).isoformat()}, indent=2))
+    'policy': 'user-amendment-v2-no-manual-budget-gate',
+    'metering_started_at': metering_started, 'actual_gpu_allocation_time': None,
+    'remaining_gpu_hours': None, 'total_GPU_budget_verified': False}, indent=2))
 print('本次结果目录：', run)
 ```
 
-重启 kernel 会丢失 env；恢复时沿用同一结果路径/分配时间，不创建新 run 掩盖成本。Drive 不存私钥。脚本不负责关掉计费 runtime；结束后由你主动断开/删除 runtime。
+重启 kernel 会丢失 env；恢复时沿用同一结果路径，不覆盖旧run，也不把新记录时间冒充实际GPU分配时间。Drive 不存私钥。脚本不负责关掉计费 runtime；结束后由你主动断开/删除 runtime。
 
 ## 3. Colab 拉取、隔离安装（分别粘贴单元格）
 
@@ -164,8 +159,6 @@ CUDA_VISIBLE_DEVICES=0 timeout --signal=TERM --kill-after=30s 600s \
   "$SFT_PY" -u scripts/pilot_research_sft.py \
   --base-dir "$BASE" --output "$SFT_RUN/pilot" \
   --run-gpu --confirm-pilot-only \
-  --remaining-gpu-hours "$SFT_REMAINING_HOURS" \
-  --gpu-allocated-at "$SFT_GPU_ALLOCATED_AT" \
   2>&1 | tee "$SFT_RUN/pilot.log"
 statuses=("${PIPESTATUS[@]}")
 set -e
@@ -188,9 +181,9 @@ print('SFT/Transformers pilot passed; ART/vLLM still pending')
 PY
 ```
 
-timeout exit=124/137、OOM、保存/重载失败、预算不足，均保留原 run，停下回传；不手动再跑同目录、不删除 checkpoint、不把部分更新写成通过。被 watchdog 强制终止时 result.json 可能只含最后进度，**以外层退出码为准**。PID 查询若还有本 pilot 进程则不能声称清理通过；不要杀掉不属于此 run 的进程。
+timeout exit=124/137、OOM、保存/重载失败，均保留原 run，停下回传；不手动再跑同目录、不删除 checkpoint、不把部分更新写成通过。被 watchdog 强制终止时 result.json 可能只含最后进度，**以外层退出码为准**。PID 查询若还有本 pilot 进程则不能声称清理通过；不要杀掉不属于此 run 的进程。
 
-默认上限 600s，加清理预留 60s；入口再次核对从分配时间起的安装/准备消耗是否仍容许该上限。最终仍需记录 GPU 断开时间，将日志时段到真正释放期间的空闲纳入账本。
+默认上限600s，TERM后最多30s强制退出；入口不再要求分配时间/剩余预算。程序只计自身启动至退出的wall time，之前的安装/空闲与真实GPU计费时长未知，不能据此声称总20小时预算已验证。结束后仍需主动断开GPU runtime。
 
 ## 6. 回传轻量反馈，不上传权重
 

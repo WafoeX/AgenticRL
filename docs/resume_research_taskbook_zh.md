@@ -282,4 +282,6 @@ results/research/<run-id>/     # 轻量原始结果、退出码、manifest与统
 
 | 2026-10-12 | 用户授权本地SFT入口/合同与远程供Colab拉取 | [入口验收](research_sft_entry_zh.md)、[命令指南](colab_research_sft_pilot_zh.md)；固定3条train、2次更新、loss/mask/grad/逐次权重变化/save/fresh reload合同；专项61passed、全567passed11.21s、fresh六文件Pyright0errors/Ruff通过；tokenizer-only preflight exit0、旧SFT与冻结字节检查通过 | R3.4仅本地入口部分，不勾选；本地只随机微型CPU模型合同，无官方权重训练/GPU/test推理。用户服务器须核对剩余预算/分配时间并单独确认A100最小pilot；ART/vLLM与正式训练仍未授权/验收。独立分支推送是否成功以实际git核对为准，未改远程master |
 
+| 2026-10-12 | 用户要求移除开发pilot手填预算/UTC分配时间限制 | [v2启动修订](research_sft_pilot_budget_amendment_v2_zh.md)；指南与CLI取消手填检查，自动记录本次程序wall time、实际分配/历史消耗/总预算未知；3新增回归，全570passed、Ruff/freshPyright通过 | 仅两步开发pilot门禁修订；保留3条train/2次更新/600s/显式确认与身份校验，未改冻结协议，不授权正式训练；旧预算门禁描述为v1历史，v2启动行为取代，A100实测仍待反馈 |
+
 后续只追加已完成事实与证据；本任务书初版不是授权无限制实现、训练或消费 GPU。
