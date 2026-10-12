@@ -75,6 +75,10 @@ def preflight(base: Path, adapter: Path):
 
 
 async def run_art(output: Path, original: dict, records: list, protocol: dict, result: dict, begun: float, received: list):
+    # ART pins torchao 0.15; PEFT 0.21 requires >=0.16. Unsloth requires PEFT >=0.18.
+    for package, expected in (("openpipe-art", "0.5.17"), ("peft", "0.18.0"), ("torchao", "0.15.0")):
+        if metadata.version(package) != expected:
+            raise ValueError(f"ART pilot requires {package}=={expected}; repair dependencies before model loading")
     # Unsloth must precede Transformers/PEFT imports in this isolated backend environment.
     importlib.import_module("unsloth")
     torch = importlib.import_module("torch")
@@ -93,7 +97,7 @@ async def run_art(output: Path, original: dict, records: list, protocol: dict, r
     props = torch.cuda.get_device_properties(0)
     if "A100" not in props.name or props.total_memory < 39 * 1024**3:
         raise ValueError("A100 40GB required")
-    result["versions"] = {n: metadata.version(n) for n in ("openpipe-art", "vllm", "torch", "transformers", "peft", "unsloth", "unsloth-zoo")}
+    result["versions"] = {n: metadata.version(n) for n in ("openpipe-art", "vllm", "torch", "transformers", "peft", "torchao", "unsloth", "unsloth-zoo")}
     result["GPU"] = props.name
     result["CUDA"] = torch.version.cuda
     art_root = output / "art-workspace"

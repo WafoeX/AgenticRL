@@ -88,7 +88,8 @@ uv --version | tee "$AR_RUN/uv_version.txt"
 test ! -e "$AR_ENV"
 uv venv --python 3.12 --seed "$AR_ENV" 2>&1 | tee "$AR_RUN/venv.log"
 uv pip install --python "$AR_PY" --index-url https://pypi.org/simple \
-  'openpipe-art[backend]==0.5.17' 'psutil==7.0.0' 'PyYAML==6.0.2' \
+  'openpipe-art[backend]==0.5.17' 'peft==0.18.0' 'torchao==0.15.0' \
+  'psutil==7.0.0' 'PyYAML==6.0.2' \
   2>&1 | tee "$AR_RUN/install.log"
 "$AR_PY" -m pip check 2>&1 | tee "$AR_RUN/pip_check.txt"
 "$AR_PY" -m pip freeze --all > "$AR_RUN/pip_freeze.txt"
