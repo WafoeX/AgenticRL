@@ -1,0 +1,143 @@
+{
+  "GPU_started_locally": false,
+  "all_summaries_and_comparison_exact": true,
+  "archive_entries": 977,
+  "dependencies_installed": false,
+  "evidence_limits": [
+    "Drive equality is a remote readback receipt, not a second local Drive copy",
+    "No independent local loading of remote adapter tensors; loader evidence is receipt plus matched locked source",
+    "Session wall time is not full Colab allocation/installation/idle accounting",
+    "No per-arm loading/synchronization wall split; only per-task timing and overall session timing",
+    "Outcome raw-response replay verifies saved behavior, not re-running the stochastic hardware model"
+  ],
+  "feedback": "results/20261018T133835Z-final-test-feedback.zip",
+  "feedback_sha256": "cd434cd4e036d613710996817145708eeea7093e16e18ebe9fb9b73c8bef1868",
+  "gpu_end_snapshot_empty": true,
+  "independent_counts_and_bootstrap": true,
+  "loader_receipts": {
+    "GRPO20261011": {
+      "GPU_name": "NVIDIA A100-SXM4-40GB",
+      "active_adapters": [
+        "default"
+      ],
+      "backend": "transformers-cuda-baseline-comparison-v2",
+      "base_dtype": "bfloat16",
+      "decoder": "unchanged-SFTValidationBackend._generate",
+      "device": "cuda:0",
+      "purpose": "frozen-four-model-final-test-no-optimizer",
+      "real_model_loaded": true,
+      "source_weights_verified": true,
+      "versions": {
+        "peft": "0.17.1",
+        "safetensors": "0.8.0",
+        "torch": "2.8.0",
+        "transformers": "4.57.1"
+      }
+    },
+    "GRPO20261012": {
+      "GPU_name": "NVIDIA A100-SXM4-40GB",
+      "active_adapters": [
+        "default"
+      ],
+      "backend": "transformers-cuda-baseline-comparison-v2",
+      "base_dtype": "bfloat16",
+      "decoder": "unchanged-SFTValidationBackend._generate",
+      "device": "cuda:0",
+      "purpose": "frozen-four-model-final-test-no-optimizer",
+      "real_model_loaded": true,
+      "source_weights_verified": true,
+      "versions": {
+        "peft": "0.17.1",
+        "safetensors": "0.8.0",
+        "torch": "2.8.0",
+        "transformers": "4.57.1"
+      }
+    },
+    "GRPO20261013": {
+      "GPU_name": "NVIDIA A100-SXM4-40GB",
+      "active_adapters": [
+        "default"
+      ],
+      "backend": "transformers-cuda-baseline-comparison-v2",
+      "base_dtype": "bfloat16",
+      "decoder": "unchanged-SFTValidationBackend._generate",
+      "device": "cuda:0",
+      "purpose": "frozen-four-model-final-test-no-optimizer",
+      "real_model_loaded": true,
+      "source_weights_verified": true,
+      "versions": {
+        "peft": "0.17.1",
+        "safetensors": "0.8.0",
+        "torch": "2.8.0",
+        "transformers": "4.57.1"
+      }
+    },
+    "SFT30": {
+      "GPU_name": "NVIDIA A100-SXM4-40GB",
+      "active_adapters": [
+        "default"
+      ],
+      "backend": "transformers-cuda-baseline-comparison-v2",
+      "base_dtype": "bfloat16",
+      "decoder": "unchanged-SFTValidationBackend._generate",
+      "device": "cuda:0",
+      "purpose": "frozen-four-model-final-test-no-optimizer",
+      "real_model_loaded": true,
+      "source_weights_verified": true,
+      "versions": {
+        "peft": "0.17.1",
+        "safetensors": "0.8.0",
+        "torch": "2.8.0",
+        "transformers": "4.57.1"
+      }
+    }
+  },
+  "max_completion_tokens_per_turn": 58,
+  "max_generation_turns": 4,
+  "max_prompt_tokens": 951,
+  "new_model_forward": false,
+  "prompt_rebuild_note": "Saved JSON sorts object keys; retokenizing that JSON directly changes tool-schema key order. All usage checks use fresh requests rebuilt by the frozen executor (including original insertion order), with semantic equality checked by RecordedBackend. Initial local audit assumption failed; no remote protocol/score changes.",
+  "raw_outcomes_exact_replayed": 960,
+  "raw_token_requests_checked": 2686,
+  "remote_readback_receipt": {
+    "backup_exists": true,
+    "complete": true,
+    "counts": {
+      "GRPO20261011": {
+        "files": 240,
+        "infra": 0,
+        "unique_attempts": 240
+      },
+      "GRPO20261012": {
+        "files": 240,
+        "infra": 0,
+        "unique_attempts": 240
+      },
+      "GRPO20261013": {
+        "files": 240,
+        "infra": 0,
+        "unique_attempts": 240
+      },
+      "SFT30": {
+        "files": 240,
+        "infra": 0,
+        "unique_attempts": 240
+      }
+    },
+    "local_exists": true,
+    "matched": true
+  },
+  "sessions": [
+    {
+      "balance_note": "约9小时",
+      "measured_wall_seconds": 5185.726842956,
+      "wall_seconds_cap": 10800
+    }
+  ],
+  "source_lock_files_verified": 55,
+  "status": "passed-offline-final-test-feedback-review",
+  "stored_JSON_prompt_length_minus_source_rebuilt_histogram": {
+    "-1": 2686
+  },
+  "training_performed_locally": false
+}

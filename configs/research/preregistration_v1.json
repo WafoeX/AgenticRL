@@ -1,0 +1,29 @@
+{
+  "registration_id": "research-preregistration-v1-20261012",
+  "status": "decisions-locked-training-budget-annex-required",
+  "candidate_directory": "data/research_v1_candidate",
+  "frozen_directory": "data/research_v1_frozen",
+  "seed": 20261011,
+  "seed_count": 1,
+  "model": {"id": "Qwen/Qwen2.5-0.5B-Instruct", "revision": "7ae557604adf67be50417f59c2c2f167def9a775"},
+  "evaluation_config": "configs/research/evaluation_v1.json",
+  "primary_metric": "test-deterministic-final-answer-accuracy-all-planned-scenarios",
+  "arms": ["B0", "B1", "G1", "G2", "A1"],
+  "arm_definitions": {
+    "B0": "official-base-no-project-adapter",
+    "B1": "base-to-train-only-SFT-selected-on-validation",
+    "G1": "shared-selected-B1-to-independent-GRPO-V1",
+    "G2": "same-selected-B1-to-independent-GRPO-research-V2",
+    "A1": "same-selected-B1-to-independent-GRPO-research-V2-without-dynamic-dependency-reward"
+  },
+  "ablation": {"removed_component": "dynamic-dependency-reward", "other_components_and_hyperparameters": "unchanged-from-G2", "rescale_remaining_rewards": false, "limitation": "reward-total-and-variance-can-change-not-pure-mechanism-identification"},
+  "selection": {"split": "validation", "scenarios": 180, "mode": "deterministic", "order": ["answer-correct-count-descending", "reference-dynamic-valid-count-descending", "checkpoint-step-ascending"], "sample_at_8_for_selection": false, "test_for_selection": false, "evaluation_frequency": "pending-budget-annex-before-formal-training", "save": ["best", "last"]},
+  "evaluation_failures": {"automatic_retries": 0, "retain_all_attempts": true, "infra_or_missing_invalidates_comparison": true, "model_errors_are_not_infra": true, "rerun": "new-complete-cohort-run-only-after-versioned-amendment-and-user-authorization-no-append"},
+  "grpo_failures": {"unit": "whole-prompt-group", "max_whole_group_retries": 1, "after_retry_failure": "skip-whole-group-and-log-all-members", "filter_individual_members": false, "implementation_verified": false, "retry_seed_and_sampling_policy": "pending-budget-annex-and-R4-verification"},
+  "fairness": {"G1_G2_A1_initial_checkpoint": "same-selected-B1-byte-identity-no-sequential-training", "matched": ["data-environment-prompt-template", "scene-order-and-seeds", "planned-updates-and-group-size", "sampling-token-turn-limits", "evaluation-frequency-and-selection", "infra-policy"], "deviations": "report-planned-versus-effective-updates-retries-tokens-and-cost-no-unqualified-equal-budget-claim"},
+  "final_test": {"scenarios_per_arm": 240, "greedy_per_scenario": 1, "sample_per_scenario": 8, "arms": 5, "planned_attempts_single_seed": 10800, "batch_rule": "all-registered-arms-and-selected-identities-locked-before-any-model-test-output", "access": "separate-user-authorization-and-final-readiness-annex-required", "development_inference_allowed": false, "statistical_reporting": ["raw-numerators-denominators", "scenario-Wilson-95-percent", "sample-and-paired-differences-semantic-scenario-cluster-bootstrap-seed-20261011-1000-replicates", "family-depth-generalization-dynamic-strata", "no-eight-samples-as-independent-scenarios", "single-seed-not-training-stability"]},
+  "test_history": {"programmatic_construction_structure_solvability_leakage_audit": true, "labels_locally_accessible": true, "known_prior_model_test_inference": false, "claim": "operational-self-built-holdout-not-external-blind-test", "after_test_consumption": "no-retuning-with-unseen-test-claim-versioned-new-study-required"},
+  "budget": {"GPU": "Colab-A100-40GB-check-actual-allocation", "total_GPU_hours_cap": 20, "deadline_target": "2026-10-25", "GPU_accounting": "include-allocation-preparation-idle-pilots-failures-retries-training-and-evaluation", "current_remaining_GPU_hours": null, "formal_training_authorized": false, "GPU_authorized_this_registration": false, "pending_annex": ["confirmed-spent-and-remaining-GPU-hours", "GPU-backend-SFT-checkpoint-compatibility-and-cost-pilot", "SFT-learning-rate-epochs-steps-batch-LoRA-loss-mask-truncation", "GRPO-learning-rate-group-size-rollouts-planned-updates-KL-and-effective-config", "reward-V1-and-research-V2-implementation-hashes-component-ranges-and-ablation", "validation-frequency-candidate-checkpoints-and-same-initialization", "per-arm-budget-and-total-test-feasibility", "retry-seed-group-order-and-max-skipped-group-tolerance", "planned-effective-budget-tolerance-and-predeclared-stop-thresholds", "Drive-backup-and-interruption-recovery", "final-all-model-identities-and-test-run-cohort"]},
+  "amendments": "append-versioned-dated-reasoned-amendment-before-affected-formal-run-preserve-original-lock-no-silent-overwrite",
+  "limitations": ["prior-validation-2-scene-base-CPU-pilot-known-all-answers-failed", "shared-environment-facts-can-enable-memory-shortcuts", "parameter-OOD-not-pure-single-factor-entity-OOD", "base-three-call-family-density-confound", "legal-Fahrenheit-single-call-bypass", "single-seed-synthetic-benchmark-no-universal-gain-claim"]
+}

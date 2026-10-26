@@ -1,0 +1,23 @@
+{
+  "version": "research-grpo-cpu-contract-v1",
+  "status": "development-only-not-formal-budget",
+  "seed": 20261011,
+  "learning_rate": 0.000005,
+  "beta": 0.0,
+  "planned_steps": 2,
+  "groups_per_step": 2,
+  "group_size": 4,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "max_completion_tokens": 512,
+  "max_prompt_tokens": 3584,
+  "max_total_completion_tokens": 1536,
+  "max_turns": 6,
+  "timeout_seconds": 120,
+  "whole_group_retries": 1,
+  "retry_policy": "same-member-seeds-restart-full-conversation",
+  "lora": {"r": 8, "lora_alpha": 16, "lora_dropout": 0.0, "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]},
+  "rewards": {"G1": "reward-v1-legacy", "G2": "reward-v2-research-v1"},
+  "formal_training_authorized": false,
+  "final_test_ready": false
+}

@@ -1,0 +1,2 @@
+# Preserve the audited CSV's original CRLF bytes; CR is an end-of-line marker.
+/results/research/final_test_feedback_review_v1/per_scenario.csv -text whitespace=cr-at-eol

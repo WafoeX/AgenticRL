@@ -1,0 +1,91 @@
+# Local launch drafts (per substack-blog skill rule)
+docs/launch/
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+# Generated Unsloth runtime cache (not source)
+/unsloth_compiled_cache/
+
+# ART training state (regenerated each run)
+.art/
+checkpoints/
+training.log
+
+# Rebuildable SFT preprocessing and model weights (keep checkpoints on Drive)
+/data/research_sft_v1/
+*.safetensors
+*.pt
+*.pth
+
+# Local tooling, secrets and generated artifacts
+.ruff_cache/
+.pi-lens.json
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+*.zip
+*.zip.sha256
+*.tar.gz
+*.npz
+
+# Final statistical evidence only; intermediate feedback and run records stay local.
+/results/*
+!/results/research/
+/results/research/*
+!/results/research/final_test_feedback_review_v1/
+/results/research/final_test_feedback_review_v1/*
+!/results/research/final_test_feedback_review_v1/per_scenario.csv
+!/results/research/final_test_feedback_review_v1/metrics.json
+!/results/research/final_test_feedback_review_v1/paired.json
+!/results/research/final_test_feedback_review_v1/strata.json
+!/results/research/final_test_feedback_review_v1/costs_and_robustness.json
+!/results/research/final_test_feedback_review_v1/cases.json
+!/results/research/final_test_feedback_review_v1/verification.json
+
+# Project documentation plus immutable protocols required by the source/data locks.
+/docs/*
+!/docs/ARCHITECTURE.md
+!/docs/REPRODUCIBILITY.md
+!/docs/research_final_test_results_v1_zh.md
+!/docs/research_final_test_plan_v1_zh.md
+!/docs/colab_research_final_test_v1_zh.md
+!/docs/research_preregistration_v1_zh.md
+
+# Career material, superseded manuals and planning/feedback documents.
+/interview_materials/
+/PROJECT_GUIDE_zh.md
+/README_OLD.md
+/README_zh_OLD.md
+/RUNBOOK.md
+/RUNBOOK_zh.md
+/RUNPOD.md
+/RUNPOD_zh.md
+
+# Local telemetry analysis drafts, not part of the validated training pipeline.
+/scripts/analyze_training_telemetry.py
+/scripts/render_training_telemetry.py
+
+# Exploratory ART/vLLM repair tools are local history, not the final HF pipeline.
+/scripts/*research_r4*
+/scripts/*research_lora*
+/scripts/restore_research_lora_base_path.py
+/scripts/build_research_grpo_pilot_bundle.py
+/scripts/build_research_grpo_save_hotfix.py
+/scripts/build_research_grpo_step30_bundle.py
+/scripts/pilot_research_grpo.py
+/scripts/prepare_research_grpo.py
+/scripts/verify_research_grpo_art_cpu.py
+/requirements-grpo-pilot.txt
+/configs/research/r4_*.json
+/scripts/build_research_answer_grpo_bundle_v1.py
+/tests/test_research_r4*
+/tests/test_research_lora*
+/tests/test_research_grpo_pilot.py
+/tests/test_research_grpo_pilot_coordinator.py
+/tests/test_research_grpo_saved_artifacts.py
+/tests/fixtures/

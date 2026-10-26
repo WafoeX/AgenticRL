@@ -1,0 +1,160 @@
+{
+  "GRPO_mean": 0.725,
+  "GRPO_sample_sd": 0.025344843876242557,
+  "mean_difference": 0.125,
+  "note": "CI conditional on these fixed models; scenario bootstrap, not 720 independent tasks. Three seeds do not estimate SFT training variance.",
+  "paired_scenario_ci95": [
+    0.08333333333333333,
+    0.16666666666666666
+  ],
+  "per_seed_paired": [
+    {
+      "ci95": [
+        0.10416666666666667,
+        0.2
+      ],
+      "first_only_correct": 1,
+      "improved_ids": [
+        "rv1-7800ed53d4bebae31191885a4ec36b9cfe076d68f27f0e4275663181e95b77cb",
+        "rv1-08b2cad3b77c40a85baabd6f0df145206c861b7686d500624d934df3233144cd",
+        "rv1-9cd0574e4122df82569f179814ce3c9d90eda5f1876d5202dd8af62aa18c67f5",
+        "rv1-6224510c8b6dc2a49d4b9dc69006beec0367b5cbf3b609c6d8a3db282fac6d8b",
+        "rv1-ccb9c086af513cf26c0e3f097e0fa4cd21733920b54415685f63df77437c24ee",
+        "rv1-704c58e8148ac1f997452ca5671625807f50fb7104e982a1b494ddf6f45b6cbe",
+        "rv1-a76d94d1680f24970845a62910d224e47d0d7086f91844436946c44bc77b3b28",
+        "rv1-fce00ac1a1da3b604170458f688d7e8b4caa4725778939a926f90d80de4896af",
+        "rv1-419df0b8a32e6139786003b33c1c9cf017628b4a8c1f4ad4b6b9e162737ccd5a",
+        "rv1-8e8fef67eb8d364d574b80e0778a4b3d66ddbb3d9c416a1fcdaeeed26e9460b7",
+        "rv1-34bd5f09901aac675e8e123575afb59b9a8ecc540be2c58cc324e9a2cf7bc74d",
+        "rv1-30f34049607f1e2dbbf6f1684ce067a203ca89fbadb5248c03fefd6fba09b426",
+        "rv1-d865b8d7bcf0f47d4325dc2ce40e8b9e40812a9edfbd7fbfb25f591e9fb64d7a",
+        "rv1-83af21c326063d3cbd8e043d82bc4512d53e304a270e6f3b81336c5435478ccf",
+        "rv1-481f48b991b28b640944fb4dd7693d2a1f0a5e47d251624852190f0a323fb6a3",
+        "rv1-7a9dabe0b8e20731b46f7a586e9a3ca5368de2bfba47716c1fc31c45e4f3f2bc",
+        "rv1-58fe6d9b7fa49e5202c30de2cd85b224949990dd4fdcb5215f6bf2843ce810c6",
+        "rv1-4c1cf2cb0f94227651fc7d227f09a0233a240cf67139bb6f8546e1d63f8e2a0f",
+        "rv1-94e41dd112efb9837b4bb5d201d52c5019cba1bfd63bbe5698d074f25a6023f1",
+        "rv1-801fbc122ed453f59da5fff2147731353fe923b28c54fd1343e08466f47ff531",
+        "rv1-eadbfa411a59a75b435d3016175baa8b1b002208ef49d86dd54ede89b83fe199",
+        "rv1-90b8999878b97c97dab8426f287779b05fce736da75a3d2a67ab5f22f688f617",
+        "rv1-7ebb1ae874991a9414d2b3ae0227494a33ddda0275de5d7d9f1a1403ee54ea6f",
+        "rv1-51815cd9fe0a88888de582b2972c81944800e4c7f6fc7a30f9741c5485f5a3b5",
+        "rv1-dc7337efc92fe6c062fbe97716b787779f401dcd74414c9d942e3120feb90c16",
+        "rv1-1875d4a2422b0422fb68674e7e5a5f029a2f96d30640fa173cfc0710d88f135a",
+        "rv1-7fd635f7ba8b442d2efb87e1db841a323b5c2e29d70e18de6ed5a8875f714d8b",
+        "rv1-3994dd1fb539fdf893c3d08e35cf6b2d6ef7e9e5fcfcdfe1cd3fa939aa35336b",
+        "rv1-cf4483f94a4a3b475e8e59704ecd4a080d777f00a0d36725d3a82223c08e2781",
+        "rv1-f3501692a64ee5f440332ad71ab1acad7de7b315a0e4635e21c13ba973f2f14a",
+        "rv1-a09e00727528a05a510e8313d350d8502c67d8c74a29478daf43271dfd0b20e5",
+        "rv1-18947927875b071d1d333d538200f8aed30f751b57a5337b51bd69e92791a0b9",
+        "rv1-f84ad38e7fe396b094a6841d8f34ba7536a58cca4174cee5d4279f46b9d28855",
+        "rv1-dfe56f5bbfd7298143b79841d5ae73195833b61fd857cf94f8b93f22ce64864e",
+        "rv1-c162ad517ebc902599f0a20d6fd82acb12a22c8dfb7b7470528f3d54cf50cc6d",
+        "rv1-9072e60fe3570d92cb346a628f5e36a4e66817f49b86f4732d50cd8cb0f2c384",
+        "rv1-82162ea901e4fbd976936f476312e60199b9bfd294a78b1367fb5f9745223ffd",
+        "rv1-cd8420b71e2d8c713bbc1906d89a7556be15ead2a51fa50405faedafb61a4a78"
+      ],
+      "mode": "deterministic",
+      "note": "Caller must verify same dataset/protocol and valid run identities; exploratory paired CI.",
+      "regressed_ids": [
+        "rv1-f6177dd4a4305982457bd4f3958cc6b92a7457343caf026135a88f46931dff63"
+      ],
+      "scenarios": 240,
+      "second_minus_first": 0.15416666666666667,
+      "second_only_correct": 38
+    },
+    {
+      "ci95": [
+        0.06666666666666667,
+        0.15833333333333333
+      ],
+      "first_only_correct": 2,
+      "improved_ids": [
+        "rv1-74b52f6dd3d1be84862f92a48d70a676525dad5682f083b72cd18f6e6f55a80d",
+        "rv1-7800ed53d4bebae31191885a4ec36b9cfe076d68f27f0e4275663181e95b77cb",
+        "rv1-08b2cad3b77c40a85baabd6f0df145206c861b7686d500624d934df3233144cd",
+        "rv1-9cd0574e4122df82569f179814ce3c9d90eda5f1876d5202dd8af62aa18c67f5",
+        "rv1-6224510c8b6dc2a49d4b9dc69006beec0367b5cbf3b609c6d8a3db282fac6d8b",
+        "rv1-ccb9c086af513cf26c0e3f097e0fa4cd21733920b54415685f63df77437c24ee",
+        "rv1-704c58e8148ac1f997452ca5671625807f50fb7104e982a1b494ddf6f45b6cbe",
+        "rv1-a76d94d1680f24970845a62910d224e47d0d7086f91844436946c44bc77b3b28",
+        "rv1-fce00ac1a1da3b604170458f688d7e8b4caa4725778939a926f90d80de4896af",
+        "rv1-419df0b8a32e6139786003b33c1c9cf017628b4a8c1f4ad4b6b9e162737ccd5a",
+        "rv1-8e8fef67eb8d364d574b80e0778a4b3d66ddbb3d9c416a1fcdaeeed26e9460b7",
+        "rv1-34bd5f09901aac675e8e123575afb59b9a8ecc540be2c58cc324e9a2cf7bc74d",
+        "rv1-30f34049607f1e2dbbf6f1684ce067a203ca89fbadb5248c03fefd6fba09b426",
+        "rv1-0d33083082e73cce453a104bf09a6fa0ee11eca68be90aecc152c40c8aa982c8",
+        "rv1-7a9dabe0b8e20731b46f7a586e9a3ca5368de2bfba47716c1fc31c45e4f3f2bc",
+        "rv1-58fe6d9b7fa49e5202c30de2cd85b224949990dd4fdcb5215f6bf2843ce810c6",
+        "rv1-eadbfa411a59a75b435d3016175baa8b1b002208ef49d86dd54ede89b83fe199",
+        "rv1-90b8999878b97c97dab8426f287779b05fce736da75a3d2a67ab5f22f688f617",
+        "rv1-7ebb1ae874991a9414d2b3ae0227494a33ddda0275de5d7d9f1a1403ee54ea6f",
+        "rv1-dc7337efc92fe6c062fbe97716b787779f401dcd74414c9d942e3120feb90c16",
+        "rv1-1875d4a2422b0422fb68674e7e5a5f029a2f96d30640fa173cfc0710d88f135a",
+        "rv1-7fd635f7ba8b442d2efb87e1db841a323b5c2e29d70e18de6ed5a8875f714d8b",
+        "rv1-3994dd1fb539fdf893c3d08e35cf6b2d6ef7e9e5fcfcdfe1cd3fa939aa35336b",
+        "rv1-f3501692a64ee5f440332ad71ab1acad7de7b315a0e4635e21c13ba973f2f14a",
+        "rv1-f84ad38e7fe396b094a6841d8f34ba7536a58cca4174cee5d4279f46b9d28855",
+        "rv1-dfe56f5bbfd7298143b79841d5ae73195833b61fd857cf94f8b93f22ce64864e",
+        "rv1-9072e60fe3570d92cb346a628f5e36a4e66817f49b86f4732d50cd8cb0f2c384",
+        "rv1-82162ea901e4fbd976936f476312e60199b9bfd294a78b1367fb5f9745223ffd",
+        "rv1-cd8420b71e2d8c713bbc1906d89a7556be15ead2a51fa50405faedafb61a4a78"
+      ],
+      "mode": "deterministic",
+      "note": "Caller must verify same dataset/protocol and valid run identities; exploratory paired CI.",
+      "regressed_ids": [
+        "rv1-f6177dd4a4305982457bd4f3958cc6b92a7457343caf026135a88f46931dff63",
+        "rv1-b78d912d86a10a5b59fda51be9ac9cb5d667765d70f788a56f7d05e9cb636543"
+      ],
+      "scenarios": 240,
+      "second_minus_first": 0.1125,
+      "second_only_correct": 29
+    },
+    {
+      "ci95": [
+        0.06666666666666667,
+        0.15
+      ],
+      "first_only_correct": 1,
+      "improved_ids": [
+        "rv1-74b52f6dd3d1be84862f92a48d70a676525dad5682f083b72cd18f6e6f55a80d",
+        "rv1-7800ed53d4bebae31191885a4ec36b9cfe076d68f27f0e4275663181e95b77cb",
+        "rv1-08b2cad3b77c40a85baabd6f0df145206c861b7686d500624d934df3233144cd",
+        "rv1-9cd0574e4122df82569f179814ce3c9d90eda5f1876d5202dd8af62aa18c67f5",
+        "rv1-6224510c8b6dc2a49d4b9dc69006beec0367b5cbf3b609c6d8a3db282fac6d8b",
+        "rv1-ccb9c086af513cf26c0e3f097e0fa4cd21733920b54415685f63df77437c24ee",
+        "rv1-704c58e8148ac1f997452ca5671625807f50fb7104e982a1b494ddf6f45b6cbe",
+        "rv1-a76d94d1680f24970845a62910d224e47d0d7086f91844436946c44bc77b3b28",
+        "rv1-fce00ac1a1da3b604170458f688d7e8b4caa4725778939a926f90d80de4896af",
+        "rv1-419df0b8a32e6139786003b33c1c9cf017628b4a8c1f4ad4b6b9e162737ccd5a",
+        "rv1-8e8fef67eb8d364d574b80e0778a4b3d66ddbb3d9c416a1fcdaeeed26e9460b7",
+        "rv1-34bd5f09901aac675e8e123575afb59b9a8ecc540be2c58cc324e9a2cf7bc74d",
+        "rv1-30f34049607f1e2dbbf6f1684ce067a203ca89fbadb5248c03fefd6fba09b426",
+        "rv1-0d33083082e73cce453a104bf09a6fa0ee11eca68be90aecc152c40c8aa982c8",
+        "rv1-7a9dabe0b8e20731b46f7a586e9a3ca5368de2bfba47716c1fc31c45e4f3f2bc",
+        "rv1-eadbfa411a59a75b435d3016175baa8b1b002208ef49d86dd54ede89b83fe199",
+        "rv1-90b8999878b97c97dab8426f287779b05fce736da75a3d2a67ab5f22f688f617",
+        "rv1-7ebb1ae874991a9414d2b3ae0227494a33ddda0275de5d7d9f1a1403ee54ea6f",
+        "rv1-dc7337efc92fe6c062fbe97716b787779f401dcd74414c9d942e3120feb90c16",
+        "rv1-1875d4a2422b0422fb68674e7e5a5f029a2f96d30640fa173cfc0710d88f135a",
+        "rv1-7fd635f7ba8b442d2efb87e1db841a323b5c2e29d70e18de6ed5a8875f714d8b",
+        "rv1-3994dd1fb539fdf893c3d08e35cf6b2d6ef7e9e5fcfcdfe1cd3fa939aa35336b",
+        "rv1-f3501692a64ee5f440332ad71ab1acad7de7b315a0e4635e21c13ba973f2f14a",
+        "rv1-a09e00727528a05a510e8313d350d8502c67d8c74a29478daf43271dfd0b20e5",
+        "rv1-dfe56f5bbfd7298143b79841d5ae73195833b61fd857cf94f8b93f22ce64864e",
+        "rv1-9072e60fe3570d92cb346a628f5e36a4e66817f49b86f4732d50cd8cb0f2c384",
+        "rv1-cd8420b71e2d8c713bbc1906d89a7556be15ead2a51fa50405faedafb61a4a78"
+      ],
+      "mode": "deterministic",
+      "note": "Caller must verify same dataset/protocol and valid run identities; exploratory paired CI.",
+      "regressed_ids": [
+        "rv1-f6177dd4a4305982457bd4f3958cc6b92a7457343caf026135a88f46931dff63"
+      ],
+      "scenarios": 240,
+      "second_minus_first": 0.10833333333333334,
+      "second_only_correct": 27
+    }
+  ],
+  "primary": "mean-three-GRPO-minus-SFT30",
+  "scenarios": 240
+}

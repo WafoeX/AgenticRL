@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agenticrl:research-record-v1",
+  "title": "Research V1 candidate record (hidden evaluation metadata)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_version", "sample_id", "family", "recipe_id", "task", "wording_id", "semantic_group_id", "semantic_signature", "value_signature", "trajectory_signature", "split", "generalization", "parameters", "parameter_domain", "candidate_index", "environment_seed", "environment_version", "environment_snapshot", "environment_hash", "reference_depth", "dependency_graph", "expected_calls", "reference_trace", "answer_spec", "oracle_answer", "reference_answer", "semantic_payload", "value_payload", "trajectory_payload", "dynamic_dependency"],
+  "properties": {
+    "schema_version": {"const": "research-record-v1"},
+    "dataset_version": {"type": "string", "minLength": 1},
+    "sample_id": {"type": "string", "pattern": "^rv1-[0-9a-f]{64}$"},
+    "family": {"type": "string", "minLength": 1},
+    "recipe_id": {"type": "string", "minLength": 1},
+    "task": {"type": "string", "minLength": 1},
+    "wording_id": {"type": "string", "minLength": 1},
+    "semantic_group_id": {"$ref": "#/$defs/hash"},
+    "semantic_signature": {"$ref": "#/$defs/hash"},
+    "value_signature": {"$ref": "#/$defs/hash"},
+    "trajectory_signature": {"$ref": "#/$defs/hash"},
+    "split": {"enum": ["train", "validation", "test"]},
+    "generalization": {"enum": ["train", "iid", "parameter", "wording", "composition"]},
+    "parameters": {"type": "object"},
+    "parameter_domain": {"enum": ["base", "val_ood", "test_ood"]},
+    "candidate_index": {"type": "integer", "minimum": 0, "maximum": 1023},
+    "environment_seed": {"type": "integer", "minimum": 0},
+    "environment_version": {"const": "synthetic-tools-v1"},
+    "environment_snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "weather", "search", "countries"],
+      "properties": {"version": {"const": "synthetic-tools-v1"}, "weather": {"type": "object", "additionalProperties": {"$ref": "#/$defs/weather"}}, "search": {"type": "object", "additionalProperties": {"$ref": "#/$defs/search_record"}}, "countries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/country"}}}
+    },
+    "environment_hash": {"$ref": "#/$defs/hash"},
+    "reference_depth": {"type": "integer", "minimum": 1, "maximum": 3},
+    "dynamic_dependency": {"type": "boolean"},
+    "dependency_graph": {"type": "array", "maxItems": 2, "items": {"$ref": "#/$defs/edge"}},
+    "expected_calls": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"$ref": "#/$defs/call"}},
+    "reference_trace": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"$ref": "#/$defs/step"}},
+    "answer_spec": {
+      "type": "object", "additionalProperties": false, "required": ["type", "unit", "abs_tol", "rel_tol"],
+      "properties": {"type": {"enum": ["number", "enum"]}, "unit": {"$ref": "#/$defs/unit"}, "abs_tol": {"type": "number", "minimum": 0}, "rel_tol": {"type": "number", "minimum": 0}}
+    },
+    "oracle_answer": {"$ref": "#/$defs/answer"},
+    "reference_answer": {"$ref": "#/$defs/answer"},
+    "semantic_payload": {"type": "object"},
+    "value_payload": {"type": "object"},
+    "trajectory_payload": {"type": "array"}
+  },
+  "$defs": {
+    "weather": {"type": "object", "additionalProperties": false, "required": ["temperature", "condition", "humidity"], "properties": {"temperature": {"type": "number"}, "condition": {"enum": ["sunny", "cloudy", "rainy"]}, "humidity": {"type": "number", "minimum": 0, "maximum": 100}}},
+    "country": {"type": "object", "additionalProperties": false, "required": ["population", "area_km2", "gdp_billion_usd"], "properties": {"population": {"type": "integer", "minimum": 0}, "area_km2": {"type": "number", "exclusiveMinimum": 0}, "gdp_billion_usd": {"type": "number", "minimum": 0}}},
+    "search_record": {"type": "object", "additionalProperties": false, "required": ["birth_year", "distance_km"], "properties": {"birth_year": {"type": "object", "additionalProperties": false, "required": ["value", "unit"], "properties": {"value": {"type": "integer", "minimum": 0}, "unit": {"const": "years"}}}, "distance_km": {"type": "object", "additionalProperties": false, "required": ["value", "unit"], "properties": {"value": {"type": "number", "minimum": 0}, "unit": {"const": "km"}}}}},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "unit": {"enum": ["dimensionless", "years", "celsius", "fahrenheit", "km", "miles", "kg", "lbs", "meters", "feet", "people_per_km2", "people_per_mile2", "billion_usd", "entity", "condition"]},
+    "answer": {"type": "object", "additionalProperties": false, "required": ["value", "unit"], "properties": {"value": {"type": ["number", "string"]}, "unit": {"$ref": "#/$defs/unit"}}},
+    "call": {"type": "object", "additionalProperties": false, "required": ["name", "arguments"], "properties": {"name": {"enum": ["calculator", "get_weather", "search", "convert_units", "lookup_db"]}, "arguments": {"type": "object"}}},
+    "step": {"type": "object", "additionalProperties": false, "required": ["turn", "name", "arguments", "observation"], "properties": {"turn": {"type": "integer", "minimum": 0, "maximum": 2}, "name": {"enum": ["calculator", "get_weather", "search", "convert_units", "lookup_db"]}, "arguments": {"type": "object"}, "observation": {"type": "string"}}},
+    "edge": {"type": "object", "additionalProperties": false, "required": ["source", "target", "source_fields", "target_argument", "transform"], "properties": {"source": {"type": "integer", "minimum": 0, "maximum": 1}, "target": {"type": "integer", "minimum": 1, "maximum": 2}, "source_fields": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "target_argument": {"type": "string"}, "transform": {"type": "string"}}}
+  }
+}

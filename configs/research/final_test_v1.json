@@ -1,0 +1,21 @@
+{
+  "version": "four-model-final-test-v1",
+  "gpu_execution_authorized": false,
+  "base_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "base_fingerprint": "5572b0e15dbd0cc2e6cc4f23aac1bab454184c1ad2170cd5bcd64230e535864c",
+  "test_sha256": "08040a4e2e7b7c410f17937496a22bccd09f925e4c5dba35da2f027380410a52",
+  "scenarios": 240,
+  "planned_tasks": 960,
+  "protocol_source": "configs/research/evaluation_v1.json",
+  "modes": ["deterministic"],
+  "primary_estimand": "mean-three-GRPO-answer-accuracy-minus-same-SFT30",
+  "bootstrap": {"seed": 20261011, "replicates": 1000, "unit": "paired-scenario-all-four-models-together", "interval": "percentile-95", "seed_variability": "sample-SD-ddof1-three-fixed-seeds-not-720-independent-scenarios"},
+  "automatic_retries": 0,
+  "models": [
+    {"arm": "SFT30", "step": 30, "checkpoint": "AgenticRL-research-sft-to30/20261018T013743Z/run/best/checkpoint-30", "fingerprint": "467e2a3253af826c71aa0f96cadcf495e59705b7af4bd3c8aa4466e91ad31633"},
+    {"arm": "GRPO20261011", "step": 28, "checkpoint": "AgenticRL-answer-grpo-v1/20261018T071612Z/run/seed-20261011/batch-0060/checkpoint-28", "fingerprint": "9299d39de2aed3e18924cf2ef586d08f451cfa45e0e7a35d4267a29ba023d3e8"},
+    {"arm": "GRPO20261012", "step": 31, "checkpoint": "AgenticRL-answer-grpo-v1/20261018T071612Z/run/seed-20261012/batch-0060/checkpoint-31", "fingerprint": "f049ed03779a2a469149b3be83fc2a3a65b01f260970cf7429479713d7f5276e"},
+    {"arm": "GRPO20261013", "step": 31, "checkpoint": "AgenticRL-answer-grpo-v1/20261018T071612Z/run/seed-20261013/batch-0060/checkpoint-31", "fingerprint": "9f6806f5648240657f906fc82c59e3c6a27e549371094bef4b19d048e34ad2ef"}
+  ],
+  "limitations_retained": ["seed11-training-rollouts-476-of-480-total1436-of1440", "sampling-versus-teacher-logprob-mismatch", "operational-holdout-not-external-blind-test", "single-SFT-seed", "no-efficiency-gain-presumed"]
+}

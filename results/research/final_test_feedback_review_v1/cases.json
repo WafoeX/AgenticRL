@@ -1,0 +1,1811 @@
+[
+  {
+    "arms": {
+      "GRPO20261011": {
+        "correct": true,
+        "errors": [
+          "legal_alternative"
+        ],
+        "final_answer": {
+          "unit": "fahrenheit",
+          "value": 22.208
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Using Fahrenheit, report how warm Fiction-5217734f632cdb80 is.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-5217734f632cdb80",
+                    "units": "fahrenheit"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": "{\"unit\":\"fahrenheit\",\"value\":22.208}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-5217734f632cdb80",
+              "units": "fahrenheit"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "turn": 0
+          }
+        ]
+      },
+      "GRPO20261012": {
+        "correct": false,
+        "errors": [
+          "missing_step",
+          "unit_error"
+        ],
+        "final_answer": {
+          "unit": "celsius",
+          "value": -5.44
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Using Fahrenheit, report how warm Fiction-5217734f632cdb80 is.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-5217734f632cdb80",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":-5.44,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": "{\"unit\":\"celsius\",\"value\":-5.44}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-5217734f632cdb80",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":-5.44,\"units\":\"celsius\"}",
+            "turn": 0
+          }
+        ]
+      },
+      "GRPO20261013": {
+        "correct": true,
+        "errors": [
+          "legal_alternative"
+        ],
+        "final_answer": {
+          "unit": "fahrenheit",
+          "value": 22.208
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Using Fahrenheit, report how warm Fiction-5217734f632cdb80 is.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-5217734f632cdb80",
+                    "units": "fahrenheit"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": "{\"unit\":\"fahrenheit\",\"value\":22.208}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-5217734f632cdb80",
+              "units": "fahrenheit"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "turn": 0
+          }
+        ]
+      },
+      "SFT30": {
+        "correct": true,
+        "errors": [
+          "legal_alternative"
+        ],
+        "final_answer": {
+          "unit": "fahrenheit",
+          "value": 22.208
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Using Fahrenheit, report how warm Fiction-5217734f632cdb80 is.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-5217734f632cdb80",
+                    "units": "fahrenheit"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": "{\"unit\":\"fahrenheit\",\"value\":22.208}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-5217734f632cdb80",
+              "units": "fahrenheit"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":40,\"temperature\":22.208,\"units\":\"fahrenheit\"}",
+            "turn": 0
+          }
+        ]
+      }
+    },
+    "family": "weather_convert",
+    "generalization": "wording",
+    "gold": {
+      "unit": "fahrenheit",
+      "value": 22.208
+    },
+    "sample_id": "rv1-b78d912d86a10a5b59fda51be9ac9cb5d667765d70f788a56f7d05e9cb636543",
+    "task": "Using Fahrenheit, report how warm Fiction-5217734f632cdb80 is."
+  },
+  {
+    "arms": {
+      "GRPO20261011": {
+        "correct": false,
+        "errors": [
+          "value_error"
+        ],
+        "final_answer": {
+          "unit": "entity",
+          "value": "Fiction-b6834930d88bf2c5"
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Which has higher Celsius temperature, Fiction-b6834930d88bf2c5 or Fiction-e5698c2dd98421ac? Return the entity, or tie.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-b6834930d88bf2c5",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-e5698c2dd98421ac",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"entity\",\"value\":\"Fiction-b6834930d88bf2c5\"}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-b6834930d88bf2c5",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "city": "Fiction-e5698c2dd98421ac",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "turn": 1
+          }
+        ]
+      },
+      "GRPO20261012": {
+        "correct": false,
+        "errors": [
+          "value_error"
+        ],
+        "final_answer": {
+          "unit": "entity",
+          "value": "Fiction-b6834930d88bf2c5"
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Which has higher Celsius temperature, Fiction-b6834930d88bf2c5 or Fiction-e5698c2dd98421ac? Return the entity, or tie.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-b6834930d88bf2c5",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-e5698c2dd98421ac",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"entity\",\"value\":\"Fiction-b6834930d88bf2c5\"}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-b6834930d88bf2c5",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "city": "Fiction-e5698c2dd98421ac",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "turn": 1
+          }
+        ]
+      },
+      "GRPO20261013": {
+        "correct": false,
+        "errors": [
+          "value_error"
+        ],
+        "final_answer": {
+          "unit": "entity",
+          "value": "Fiction-b6834930d88bf2c5"
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Which has higher Celsius temperature, Fiction-b6834930d88bf2c5 or Fiction-e5698c2dd98421ac? Return the entity, or tie.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-b6834930d88bf2c5",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-e5698c2dd98421ac",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"entity\",\"value\":\"Fiction-b6834930d88bf2c5\"}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-b6834930d88bf2c5",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "city": "Fiction-e5698c2dd98421ac",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "turn": 1
+          }
+        ]
+      },
+      "SFT30": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "entity",
+          "value": "Fiction-e5698c2dd98421ac"
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Which has higher Celsius temperature, Fiction-b6834930d88bf2c5 or Fiction-e5698c2dd98421ac? Return the entity, or tie.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-b6834930d88bf2c5",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "city": "Fiction-e5698c2dd98421ac",
+                    "units": "celsius"
+                  },
+                  "name": "get_weather"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"entity\",\"value\":\"Fiction-e5698c2dd98421ac\"}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "city": "Fiction-b6834930d88bf2c5",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":70.1,\"units\":\"celsius\"}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "city": "Fiction-e5698c2dd98421ac",
+              "units": "celsius"
+            },
+            "name": "get_weather",
+            "observation": "{\"condition\":\"rainy\",\"humidity\":21,\"temperature\":85.1,\"units\":\"celsius\"}",
+            "turn": 1
+          }
+        ]
+      }
+    },
+    "family": "weather_compare",
+    "generalization": "parameter",
+    "gold": {
+      "unit": "entity",
+      "value": "Fiction-e5698c2dd98421ac"
+    },
+    "sample_id": "rv1-f6177dd4a4305982457bd4f3958cc6b92a7457343caf026135a88f46931dff63",
+    "task": "Which has higher Celsius temperature, Fiction-b6834930d88bf2c5 or Fiction-e5698c2dd98421ac? Return the entity, or tie."
+  },
+  {
+    "arms": {
+      "GRPO20261011": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "people_per_mile2",
+          "value": 21316.695699
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "For Fiction-063cb522283c6068, report people per square mile using population and area_km2.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "key": "Fiction-063cb522283c6068",
+                    "table": "countries"
+                  },
+                  "name": "lookup_db"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "1111107/135"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "8230.422222222222",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "people_per_km2",
+                    "to_unit": "people_per_mile2",
+                    "value": 8230.422222222222
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "21316.695699",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"people_per_mile2\",\"value\":21316.695699}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "key": "Fiction-063cb522283c6068",
+              "table": "countries"
+            },
+            "name": "lookup_db",
+            "observation": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "1111107/135"
+            },
+            "name": "calculator",
+            "observation": "8230.422222222222",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "people_per_km2",
+              "to_unit": "people_per_mile2",
+              "value": 8230.422222222222
+            },
+            "name": "convert_units",
+            "observation": "21316.695699",
+            "turn": 2
+          }
+        ]
+      },
+      "GRPO20261012": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "people_per_mile2",
+          "value": 21316.695699
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "For Fiction-063cb522283c6068, report people per square mile using population and area_km2.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "key": "Fiction-063cb522283c6068",
+                    "table": "countries"
+                  },
+                  "name": "lookup_db"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "1111107/135"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "8230.422222222222",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "people_per_km2",
+                    "to_unit": "people_per_mile2",
+                    "value": 8230.422222222222
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "21316.695699",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"people_per_mile2\",\"value\":21316.695699}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "key": "Fiction-063cb522283c6068",
+              "table": "countries"
+            },
+            "name": "lookup_db",
+            "observation": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "1111107/135"
+            },
+            "name": "calculator",
+            "observation": "8230.422222222222",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "people_per_km2",
+              "to_unit": "people_per_mile2",
+              "value": 8230.422222222222
+            },
+            "name": "convert_units",
+            "observation": "21316.695699",
+            "turn": 2
+          }
+        ]
+      },
+      "GRPO20261013": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "people_per_mile2",
+          "value": 21316.695699
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "For Fiction-063cb522283c6068, report people per square mile using population and area_km2.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "key": "Fiction-063cb522283c6068",
+                    "table": "countries"
+                  },
+                  "name": "lookup_db"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "1111107/135"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "8230.422222222222",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "people_per_km2",
+                    "to_unit": "people_per_mile2",
+                    "value": 8230.422222222222
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "21316.695699",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"people_per_mile2\",\"value\":21316.695699}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "key": "Fiction-063cb522283c6068",
+              "table": "countries"
+            },
+            "name": "lookup_db",
+            "observation": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "1111107/135"
+            },
+            "name": "calculator",
+            "observation": "8230.422222222222",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "people_per_km2",
+              "to_unit": "people_per_mile2",
+              "value": 8230.422222222222
+            },
+            "name": "convert_units",
+            "observation": "21316.695699",
+            "turn": 2
+          }
+        ]
+      },
+      "SFT30": {
+        "correct": false,
+        "errors": [
+          "missing_step",
+          "unit_error"
+        ],
+        "final_answer": {
+          "unit": "people_per_km2",
+          "value": 8230.422222222222
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "For Fiction-063cb522283c6068, report people per square mile using population and area_km2.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "key": "Fiction-063cb522283c6068",
+                    "table": "countries"
+                  },
+                  "name": "lookup_db"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "1111107/135"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "8230.422222222222",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"people_per_km2\",\"value\":8230.422222222222}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "key": "Fiction-063cb522283c6068",
+              "table": "countries"
+            },
+            "name": "lookup_db",
+            "observation": "{\"area_km2\":135,\"gdp_billion_usd\":3433,\"population\":1111107}",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "1111107/135"
+            },
+            "name": "calculator",
+            "observation": "8230.422222222222",
+            "turn": 1
+          }
+        ]
+      }
+    },
+    "family": "country_density_convert",
+    "generalization": "wording",
+    "gold": {
+      "unit": "people_per_mile2",
+      "value": 21316.695699
+    },
+    "sample_id": "rv1-7800ed53d4bebae31191885a4ec36b9cfe076d68f27f0e4275663181e95b77cb",
+    "task": "For Fiction-063cb522283c6068, report people per square mile using population and area_km2."
+  },
+  {
+    "arms": {
+      "GRPO20261011": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "km",
+          "value": 434.8
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Multiply Fiction-800e6e9d9923a264's distance_km by 4; report km.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-800e6e9d9923a264 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "108.7*4"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "434.8",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"km\",\"value\":434.8}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-800e6e9d9923a264 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "108.7*4"
+            },
+            "name": "calculator",
+            "observation": "434.8",
+            "turn": 1
+          }
+        ]
+      },
+      "GRPO20261012": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "km",
+          "value": 434.8
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Multiply Fiction-800e6e9d9923a264's distance_km by 4; report km.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-800e6e9d9923a264 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "108.7*4"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "434.8",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"km\",\"value\":434.8}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-800e6e9d9923a264 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "108.7*4"
+            },
+            "name": "calculator",
+            "observation": "434.8",
+            "turn": 1
+          }
+        ]
+      },
+      "GRPO20261013": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "km",
+          "value": 434.8
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Multiply Fiction-800e6e9d9923a264's distance_km by 4; report km.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-800e6e9d9923a264 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "108.7*4"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "434.8",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"km\",\"value\":434.8}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-800e6e9d9923a264 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "108.7*4"
+            },
+            "name": "calculator",
+            "observation": "434.8",
+            "turn": 1
+          }
+        ]
+      },
+      "SFT30": {
+        "correct": false,
+        "errors": [
+          "missing_step",
+          "value_error"
+        ],
+        "final_answer": {
+          "unit": "km",
+          "value": 434.96
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Multiply Fiction-800e6e9d9923a264's distance_km by 4; report km.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-800e6e9d9923a264 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": "{\"unit\":\"km\",\"value\":434.96}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-800e6e9d9923a264 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-800e6e9d9923a264\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":108.7}]",
+            "turn": 0
+          }
+        ]
+      }
+    },
+    "family": "measurement_scale",
+    "generalization": "composition",
+    "gold": {
+      "unit": "km",
+      "value": 434.8
+    },
+    "sample_id": "rv1-90b8999878b97c97dab8426f287779b05fce736da75a3d2a67ab5f22f688f617",
+    "task": "Multiply Fiction-800e6e9d9923a264's distance_km by 4; report km."
+  },
+  {
+    "arms": {
+      "GRPO20261011": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "miles",
+          "value": 109.050644
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Add 7 km to Fiction-269b3c6a9375f314's distance_km, then convert to miles.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-269b3c6a9375f314 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "7+168.5"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "175.5",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "km",
+                    "to_unit": "miles",
+                    "value": 175.5
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "109.050644",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"miles\",\"value\":109.050644}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-269b3c6a9375f314 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "7+168.5"
+            },
+            "name": "calculator",
+            "observation": "175.5",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "km",
+              "to_unit": "miles",
+              "value": 175.5
+            },
+            "name": "convert_units",
+            "observation": "109.050644",
+            "turn": 2
+          }
+        ]
+      },
+      "GRPO20261012": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "miles",
+          "value": 109.050644
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Add 7 km to Fiction-269b3c6a9375f314's distance_km, then convert to miles.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-269b3c6a9375f314 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "7+168.5"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "175.5",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "km",
+                    "to_unit": "miles",
+                    "value": 175.5
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "109.050644",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"miles\",\"value\":109.050644}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-269b3c6a9375f314 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "7+168.5"
+            },
+            "name": "calculator",
+            "observation": "175.5",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "km",
+              "to_unit": "miles",
+              "value": 175.5
+            },
+            "name": "convert_units",
+            "observation": "109.050644",
+            "turn": 2
+          }
+        ]
+      },
+      "GRPO20261013": {
+        "correct": true,
+        "errors": [],
+        "final_answer": {
+          "unit": "miles",
+          "value": 109.050644
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Add 7 km to Fiction-269b3c6a9375f314's distance_km, then convert to miles.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-269b3c6a9375f314 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "7+168.5"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "175.5",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "from_unit": "km",
+                    "to_unit": "miles",
+                    "value": 175.5
+                  },
+                  "name": "convert_units"
+                },
+                "id": "qwen-turn-2-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "109.050644",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-2-call-0"
+          },
+          {
+            "content": "{\"unit\":\"miles\",\"value\":109.050644}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-269b3c6a9375f314 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "7+168.5"
+            },
+            "name": "calculator",
+            "observation": "175.5",
+            "turn": 1
+          },
+          {
+            "arguments": {
+              "from_unit": "km",
+              "to_unit": "miles",
+              "value": 175.5
+            },
+            "name": "convert_units",
+            "observation": "109.050644",
+            "turn": 2
+          }
+        ]
+      },
+      "SFT30": {
+        "correct": false,
+        "errors": [
+          "missing_step",
+          "value_error"
+        ],
+        "final_answer": {
+          "unit": "miles",
+          "value": 175.5
+        },
+        "messages": [
+          {
+            "content": "This benchmark uses fictional entities and fixed synthetic facts, not real-world facts. Use the provided tools to read this scenario's facts. Search queries have the form '<entity> <field>'. The final response must be exactly one JSON object with keys value and unit. value is a finite number or an entity/condition string; equal comparisons use tie. Use the requested unit, with these unit labels: dimensionless, years, celsius, fahrenheit, km, miles, kg, lbs, meters, feet, people_per_km2, people_per_mile2, billion_usd, entity, condition.",
+            "role": "system"
+          },
+          {
+            "content": "Add 7 km to Fiction-269b3c6a9375f314's distance_km, then convert to miles.",
+            "role": "user"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "query": "Fiction-269b3c6a9375f314 distance_km"
+                  },
+                  "name": "search"
+                },
+                "id": "qwen-turn-0-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-0-call-0"
+          },
+          {
+            "content": null,
+            "role": "assistant",
+            "tool_calls": [
+              {
+                "function": {
+                  "arguments": {
+                    "expression": "7+168.5"
+                  },
+                  "name": "calculator"
+                },
+                "id": "qwen-turn-1-call-0",
+                "type": "function"
+              }
+            ]
+          },
+          {
+            "content": "175.5",
+            "role": "tool",
+            "tool_call_id": "qwen-turn-1-call-0"
+          },
+          {
+            "content": "{\"unit\":\"miles\",\"value\":175.5}",
+            "role": "assistant"
+          }
+        ],
+        "trace": [
+          {
+            "arguments": {
+              "query": "Fiction-269b3c6a9375f314 distance_km"
+            },
+            "name": "search",
+            "observation": "[{\"entity\":\"Fiction-269b3c6a9375f314\",\"field\":\"distance_km\",\"unit\":\"km\",\"value\":168.5}]",
+            "turn": 0
+          },
+          {
+            "arguments": {
+              "expression": "7+168.5"
+            },
+            "name": "calculator",
+            "observation": "175.5",
+            "turn": 1
+          }
+        ]
+      }
+    },
+    "family": "distance_offset_convert",
+    "generalization": "composition",
+    "gold": {
+      "unit": "miles",
+      "value": 109.050644
+    },
+    "sample_id": "rv1-7a9dabe0b8e20731b46f7a586e9a3ca5368de2bfba47716c1fc31c45e4f3f2bc",
+    "task": "Add 7 km to Fiction-269b3c6a9375f314's distance_km, then convert to miles."
+  }
+]

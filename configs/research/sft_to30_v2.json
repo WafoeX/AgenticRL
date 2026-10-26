@@ -1,0 +1,10 @@
+{
+  "version": "research-sft-to30-v2",
+  "target_step": 30,
+  "validation_steps": [20, 30],
+  "selection": "answer-desc,dynamic-desc,earlier-step",
+  "retain_previous_candidates": true,
+  "training_from_scratch": false,
+  "GRPO": false,
+  "test": false
+}

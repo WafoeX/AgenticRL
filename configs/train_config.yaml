@@ -1,0 +1,36 @@
+model:
+  base: "Qwen/Qwen2.5-0.5B-Instruct"
+  name: "qwen-0.5b-tool-agent"
+  project: "rl-tool-use"
+
+training:
+  num_steps: 50
+  rollouts_per_step: 96
+  learning_rate: 5.0e-5
+  num_generations: 8
+  # Opt-in trajectory-aware scorer; v1 preserves previous experiments.
+  reward_version: "v1"
+  # Read-only Phase 1 diagnostics; false restores the original logging.
+  diagnostics_enabled: true
+  max_completion_tokens: 512
+  temperature: 1.0
+  beta: 0.0
+
+evaluation:
+  num_scenarios: 50
+  max_turns: 6
+  # Used by eval_checkpoint.py --config; not by the training loop.
+  batch_scenarios: 4
+  deterministic_temperature: 0.0
+  max_tokens: 512
+  # Explicitly enable with --complete-chain; legacy reward metrics stay intact.
+  complete_chain_enabled: false
+
+tools:
+  max_turns: 6
+  available:
+    - calculator
+    - get_weather
+    - search
+    - convert_units
+    - lookup_db
